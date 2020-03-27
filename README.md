@@ -1,1 +1,1 @@
-# Asp.NetCoreMVCProject-RentItEasy
+# RentItEasy
