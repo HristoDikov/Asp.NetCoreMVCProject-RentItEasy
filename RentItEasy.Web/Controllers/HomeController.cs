@@ -1,26 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using RentItEasy.Models;
-
-namespace RentItEasy.Controllers
+﻿namespace RentItEasy.Controllers
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
+    using RentItEasy.Data;
+    using RentItEasy.Models;
+    using RentItEasy.Services;
+    using RentItEasy.Web.ViewModels.Home;
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private IAdService adService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IAdService adService)
         {
             _logger = logger;
+            this.adService = adService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var adsFromService = adService.GetTenOfMostVisitedAds();
+
+            List<AdViewModel> viewModel = adsFromService.Select(a => new AdViewModel
+            {
+                Title = a.Title,
+                Description = a.Description,
+                CountOfVisits = a.CountOfVisits,
+                RentPrice = a.Property.RentPrice,
+                Size = a.Property.Size,
+                Location = a.Property.Location,
+                PropertyType = a.Property.PropertyType.ToString(),
+                BuildingClass = a.Property.BuildingClass.ToString(),
+            }).ToList();
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

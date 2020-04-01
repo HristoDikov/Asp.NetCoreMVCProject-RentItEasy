@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RentItEasy.Data\RentItEasy.Data.csproj" />
+    <ProjectReference Include="..\RentItEasy.Services\RentItEasy.Services.csproj" />
   </ItemGroup>
 
 </Project>

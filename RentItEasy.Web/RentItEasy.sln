@@ -12,13 +12,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentItEasy.Data", "..\RentItEasy.Data\RentItEasy.Data.csproj", "{A444DA28-9141-4925-B467-3EB10889DDCC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0B126875-7223-44F9-BC57-418AD411485D}"
-	ProjectSection(SolutionItems) = preProject
-		..\RentItEasy.Services\Program.cs = ..\RentItEasy.Services\Program.cs
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentItEasy.Services", "..\RentItEasy.Services\RentItEasy.Services.csproj", "{42E27F67-2639-4C90-8697-D216126BBBB3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentItEasy.Models", "..\RentItEasy.Models\RentItEasy.Models.csproj", "{434DB40F-519E-429B-84E8-8E9E29277B0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RentItEasy.Common", "RentItEasy.Common", "{638DBA79-A745-4EB8-944F-DD734130E6F4}"
+	ProjectSection(SolutionItems) = preProject
+		GlobalConstants.cs = GlobalConstants.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,6 +12,10 @@ namespace RentItEasy.Data
         {
         }
 
+        public ApplicationDbContext()
+        {
+        }
+
         public DbSet<Account> Accounts { get; set; }
 
         public DbSet<Ad> Ads { get; set; }

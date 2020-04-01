@@ -8,10 +8,10 @@
     {
         public string UserId { get; set; }
 
-        public UserProfile UserProfile { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
 
         public string AgencyId { get; set; }
 
-        public AgencyProfile AgencyProfile { get; set; }
+        public virtual AgencyProfile AgencyProfile { get; set; }
     }
 }

@@ -26,14 +26,14 @@
 
         public string AccountId { get; set; }
 
-        public Account Account { get; set; }
+        public virtual Account Account { get; set; }
 
         public string RatingId { get; set; }
 
-        public Rating Rating { get; set; }
+        public virtual Rating Rating { get; set; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
-        public HashSet<Ad> Ads { get; set; }
+        public virtual HashSet<Ad> Ads { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using RentItEasy.Data;
 namespace RentItEasy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200329195044_InitialCreate")]
+    [Migration("20200331190347_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,8 +34,14 @@ namespace RentItEasy.Data.Migrations
                     b.Property<int>("CountOfVisits")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PropertyId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserProfileId")
                         .HasColumnType("nvarchar(450)");

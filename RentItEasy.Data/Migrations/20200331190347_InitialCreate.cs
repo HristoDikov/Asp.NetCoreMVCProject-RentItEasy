@@ -251,6 +251,8 @@ namespace RentItEasy.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     CountOfVisits = table.Column<int>(nullable: false),
                     PropertyId = table.Column<int>(nullable: false),
                     AgencyProfileId = table.Column<string>(nullable: true),
