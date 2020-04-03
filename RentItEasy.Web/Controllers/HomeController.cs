@@ -5,7 +5,6 @@
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
-    using RentItEasy.Data;
     using RentItEasy.Models;
     using RentItEasy.Services;
     using RentItEasy.Web.ViewModels.Home;
