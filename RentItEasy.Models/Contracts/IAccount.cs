@@ -3,7 +3,7 @@ namespace RentItEasy.Models.Contracts
 {
     using System;
 
-    public interface IProfile
+    public interface IAccount
     {
         string Id { get; set; }
 

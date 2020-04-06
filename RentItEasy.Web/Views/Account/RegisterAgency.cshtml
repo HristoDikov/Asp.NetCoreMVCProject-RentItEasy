@@ -1,4 +1,4 @@
-﻿@model RentItEasy.RentItEasy.Web.ViewModels.Account.RegisterAsUserInputModel
+﻿@model RentItEasy.RentItEasy.Web.ViewModels.Account.RegisterAsAgencyInputModel
 @{
     ViewData["Title"] = "Register";
 }
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </header>
 
-<form asp-controller="Account" asp-action="RegisterUser" style="max-width:500px;margin:1%">
+<form asp-controller="Account" asp-action="RegisterAgency" style="max-width:500px;margin:1%">
     <div class="input-container">
         <i class="fa fa-user icon"></i>
         <input class="input-field" asp-for="Username" placeholder="Username">
@@ -16,20 +16,8 @@
     </div>
 
     <div class="input-container">
-        <i class="fa fa-male icon"></i>
-        <input class="input-field" asp-for="FirstName" placeholder="First name" >
-        <span asp-validation-for="FirstName" class="text-danger"></span>
-    </div>
-
-    <div class="input-container">
-        <i class="fa fa-male icon"></i>
-        <input class="input-field" asp-for="LastName" placeholder="Last name">
-        <span asp-validation-for="LastName" class="text-danger"></span>
-    </div>
-
-    <div class="input-container">
         <i class="fa fa-phone icon"></i>
-        <input class="input-field" asp-for="PhoneNumber" placeholder="Phone number" >
+        <input class="input-field" asp-for="PhoneNumber" placeholder="Phone number">
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
 
@@ -40,12 +28,18 @@
     </div>
 
     <div class="input-container">
+        <i class="fa fa-address icon"></i>
+        <input class="form-control" asp-for="Address" placeholder="Address" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="input-container">
         <i class="fa fa-key icon"></i>
         <input class="input-field" asp-for="Password" placeholder="Password">
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
 
-    <div class="form-container">
+    <div class="input-container">
         <i class="fa fa-key icon"></i>
         <input class="input-field" asp-for="ConfirmPassword" placeholder="Confirm password">
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
@@ -53,7 +47,3 @@
 
     <button class="btn btn-secondary btn-lg btn-block" role="button" aria-pressed="true">Register as Company</button>
 </form>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

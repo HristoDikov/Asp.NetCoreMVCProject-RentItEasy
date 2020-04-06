@@ -5,7 +5,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class AgencyProfile : IProfile
+    public class AgencyProfile
     {
         public AgencyProfile()
         {
@@ -15,19 +15,13 @@
 
         public string Id { get; set; }
 
-        public string Username { get; set; }
-
-        public string Email { get; set; }
-
         public string Address { get; set; }
 
-        public int Number { get; set; }
+        public string PhoneNumber { get; set; }
 
         public string RatingId { get; set; }
 
         public virtual Rating Rating { get; set; }
-
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
         public string AccountId { get; set; }
 

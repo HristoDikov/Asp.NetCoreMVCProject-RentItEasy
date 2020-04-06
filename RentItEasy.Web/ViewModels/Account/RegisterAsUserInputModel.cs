@@ -24,7 +24,7 @@ namespace RentItEasy.RentItEasy.Web.ViewModels.Account
 
         [Required]
         [Display(Name = "Phone number")]
-        public int Number { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required]
         [EmailAddress]

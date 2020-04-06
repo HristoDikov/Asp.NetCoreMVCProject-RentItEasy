@@ -35,9 +35,9 @@
             }
 
             await this.accountService.CreateUser(model.Username, model.FirstName, model.LastName, 
-                model.Email, model.Number, model.Password);
+                model.Email, model.PhoneNumber, model.Password);
 
-            return this.View();
+            return this.Redirect(GlobalConstants.homeUrl);
         }
 
         [HttpGet]
@@ -56,9 +56,27 @@
             }
 
             await accountService.CreateAgency(model.Username, model.Email, model.Address,
-                model.Number, model.Password);
+                model.PhoneNumber, model.Password);
 
             return this.Redirect(GlobalConstants.homeUrl);
+        }
+
+        [HttpGet]
+        public IActionResult Login() 
+        {
+            return this.View();
+        }
+
+        public IActionResult Login(LoginInputModel model) 
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            var url =  this.accountService.Login(model.Username, model.Password, model.RememberMe).Result;
+
+            return this.View();
         }
     }
 }

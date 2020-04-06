@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RentItEasy.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,8 @@ namespace RentItEasy.Data.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
-                    AgencyId = table.Column<string>(nullable: true)
+                    AgencyId = table.Column<string>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,12 +190,9 @@ namespace RentItEasy.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    Username = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
-                    Number = table.Column<int>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: true),
                     RatingId = table.Column<string>(nullable: true),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
                     AccountId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -221,12 +219,9 @@ namespace RentItEasy.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    Username = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Number = table.Column<int>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: true),
                     AccountId = table.Column<string>(nullable: true),
-                    RatingId = table.Column<string>(nullable: true),
-                    CreatedOn = table.Column<DateTime>(nullable: false)
+                    RatingId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -253,6 +248,7 @@ namespace RentItEasy.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    Image = table.Column<byte[]>(nullable: true),
                     CountOfVisits = table.Column<int>(nullable: false),
                     PropertyId = table.Column<int>(nullable: false),
                     AgencyProfileId = table.Column<string>(nullable: true),

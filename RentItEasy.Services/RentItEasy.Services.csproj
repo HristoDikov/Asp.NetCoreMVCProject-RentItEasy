@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GlobalConstants\GlobalConstants.csproj" />
     <ProjectReference Include="..\RentItEasy.Data\RentItEasy.Data.csproj" />
     <ProjectReference Include="..\RentItEasy.Models\RentItEasy.Models.csproj" />
   </ItemGroup>

@@ -5,7 +5,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class UserProfile : IProfile
+    public class UserProfile
     {
         public UserProfile()
         {
@@ -18,11 +18,7 @@
 
         public string LastName { get; set; }
 
-        public string Username { get; set; }
-
-        public string Email { get; set; }
-
-        public int Number { get; set; }
+        public string PhoneNumber { get; set; }
 
         public string AccountId { get; set; }
 
@@ -31,8 +27,6 @@
         public string RatingId { get; set; }
 
         public virtual Rating Rating { get; set; }
-
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
         public virtual HashSet<Ad> Ads { get; set; }
     }
