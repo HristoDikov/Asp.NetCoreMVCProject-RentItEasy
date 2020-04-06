@@ -8,10 +8,12 @@
     public class AdService : IAdService
     {
         private readonly ApplicationDbContext db;
+
         public AdService(ApplicationDbContext db)
         {
             this.db = db;
         }
+
         public IEnumerable<Ad> GetTenOfMostVisitedAds()
         {
             var ads = this.db.Ads.Select(a => new Ad

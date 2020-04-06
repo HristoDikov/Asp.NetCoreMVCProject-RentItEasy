@@ -3,11 +3,11 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using global::RentItEasy.Models;
+    using global::RentItEasy.Services;
+    using global::RentItEasy.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
-    using RentItEasy.Models;
-    using RentItEasy.Services;
-    using RentItEasy.Web.ViewModels.Home;
 
     public class HomeController : Controller
     {

@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RentItEasy.Services;
 using RentItEasy.Models;
+using RentItEasy.Services.Contracts;
 
 namespace RentItEasy
 {
@@ -39,6 +40,7 @@ namespace RentItEasy
             services.AddControllersWithViews();
 
             services.AddScoped<IAdService, AdService>();
+            services.AddScoped<IAccountService, AccountService>();
             services.AddRazorPages();
         }
        
