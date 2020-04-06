@@ -1,5 +1,6 @@
 ﻿namespace RentItEasy.Services.Contracts
 {
+    using AspNetCoreTemplate.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using RentItEasy.Data;
     using RentItEasy.Models;
@@ -38,9 +39,37 @@
 
             userProfile.AccountId = user.Id;
             userProfile.Account = user;
-            db.Accounts.AddAsync(user);
-            db.UsersProfiles.AddAsync(userProfile);
-            db.SaveChanges();
+
+            await db.UsersProfiles.AddAsync(userProfile);
+            await db.Accounts.AddAsync(user);
+            await db.SaveChangesAsync();
+        }
+
+
+        public async Task CreateAgency(string username, string email, string address, int phoneNumber, string password)
+        {
+            var agencyProfile = new AgencyProfile
+            {
+                Username = username,
+                Email = email,
+                Address = address,
+                Number = phoneNumber,
+            };
+
+            var user = new Account
+            {
+                AgencyId = agencyProfile.Id,
+                AgencyProfile = agencyProfile
+            };
+            
+            await userManager.CreateAsync(user, password);
+
+            agencyProfile.AccountId = user.Id;
+            agencyProfile.Account = user;
+
+            await db.AgenciesProfiles.AddAsync(agencyProfile);
+            await db.Accounts.AddAsync(user);
+            await db.SaveChangesAsync();
         }
     }
 }

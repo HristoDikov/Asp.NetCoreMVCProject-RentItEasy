@@ -1,5 +1,6 @@
 ﻿namespace RentItEasy.Controllers
 {
+    using global::RentItEasy.Common;
     using global::RentItEasy.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
     using RentItEasy.Web.ViewModels.Account;
@@ -37,6 +38,27 @@
                 model.Email, model.Number, model.Password);
 
             return this.View();
+        }
+
+        [HttpGet]
+        public IActionResult RegisterAgency()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> RegisterAgency(RegisterAsAgencyInputModel model) 
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            await accountService.CreateAgency(model.Username, model.Email, model.Address,
+                model.Number, model.Password);
+
+            return this.Redirect(GlobalConstants.homeUrl);
         }
     }
 }
