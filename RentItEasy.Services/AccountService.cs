@@ -90,6 +90,11 @@
 
             return GlobalConstants.loginUrl;
         }
+
+        public async Task Logout()
+        {
+            await this.signInManager.SignOutAsync();
+        }
     }
 }
 

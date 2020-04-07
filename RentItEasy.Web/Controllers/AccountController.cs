@@ -76,7 +76,14 @@
 
             var url =  this.accountService.Login(model.Username, model.Password, model.RememberMe).Result;
 
-            return this.View();
+            return this.Redirect(GlobalConstants.homeUrl);
+        }
+
+        public IActionResult Logout() 
+        {
+            this.accountService.Logout();
+
+            return this.Redirect(GlobalConstants.homeUrl);
         }
     }
 }

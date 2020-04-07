@@ -8,5 +8,7 @@
         Task CreateAgency(string username, string email, string address, string phoneNumber, string password);
 
         Task<string> Login(string email, string password, bool rememberMe);
+
+        Task Logout();
     }
 }
