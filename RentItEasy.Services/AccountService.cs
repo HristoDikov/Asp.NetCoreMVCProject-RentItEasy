@@ -74,8 +74,6 @@
             agencyProfile.AccountId = user.Id;
             agencyProfile.Account = user;
 
-            await db.AgenciesProfiles.AddAsync(agencyProfile);
-            await db.Accounts.AddAsync(user);
             await db.SaveChangesAsync();
         }
 
