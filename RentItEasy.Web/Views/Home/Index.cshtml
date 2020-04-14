@@ -1,19 +1,21 @@
 ﻿@using RentItEasy.Common
-@model List<RentItEasy.Web.ViewModels.Home.AdViewModel>
+@model List<RentItEasy.Areas.User.ViewModels.AdViewModel>
 @{
     this.ViewData["Title"] = $"Welcome to {GlobalConstants.SystemName}";
 }
 
-<div class="text-center">
-    <h1 class="display-4">@this.ViewData["Title"]</h1>
+<h1 class="text-center">@this.ViewData["Title"]</h1>
+
+<div class="row">
+    <hr />
     @foreach (var ad in Model)
     {
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="@ad.Image/100px180/" alt="Card image cap">
+        <div class="col-4" style="width: 18rem;">
+            <img src=@ad.Path class="mr-10" alt="Card image cap" height="180" width="287">
             <div class="card-body">
                 <h5 class="card-title">@ad.Title</h5>
                 <p class="card-text">@ad.Description</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a asp-area="User" asp-controller="Ad" asp-action="ViewAd" asp-route-id="@ad.Id" class="btn btn-primary">View Ad</a>
             </div>
         </div>
     }

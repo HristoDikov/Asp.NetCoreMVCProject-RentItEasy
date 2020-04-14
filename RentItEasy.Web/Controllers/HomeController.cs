@@ -1,11 +1,11 @@
 ﻿namespace RentItEasy.Controllers
 {
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using global::RentItEasy.Areas.User.ViewModels;
+    using global::RentItEasy.Common;
     using global::RentItEasy.Models;
     using global::RentItEasy.Services;
-    using global::RentItEasy.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
@@ -24,10 +24,12 @@
         {
             var adsFromService = adService.GetTenOfMostVisitedAds();
 
-            List<AdViewModel> viewModel = adsFromService.Select(a => new AdViewModel
+            var viewModel = adsFromService.Select(a => new AdViewModel
             {
-                Title = "asd"/*a.Title*/,
-                Description = "asd"/*a.Description*/,
+                Title = a.Title,
+                Description = a.Description,
+                Path = GlobalConstants.cloudinary + a.ImagesPaths.First().Path,
+                Id = a.Id,
             }).ToList();
 
             return View(viewModel);

@@ -1,8 +1,6 @@
 ﻿namespace RentItEasy.Services
 {
     using Microsoft.EntityFrameworkCore;
-    using RentItEasy.Areas.User.ViewModels;
-    using RentItEasy.Common;
     using RentItEasy.Data;
     using RentItEasy.Data.Models;
     using RentItEasy.Models.Enums;
@@ -47,7 +45,7 @@
             await this.db.SaveChangesAsync();
         }
 
-        public IEnumerable<ImagePath> CreateImagePath(IEnumerable<string> imagesPaths, Ad ad)
+        private IEnumerable<ImagePath> CreateImagePath(IEnumerable<string> imagesPaths, Ad ad)
         {
             var imagesPathsAsList = imagesPaths.ToList();
             var createdImagesPaths = new List<ImagePath>();
@@ -65,35 +63,35 @@
 
             return createdImagesPaths;
         }
+
+        public Ad GetAd(int id)
+        {
+            var ad = this.db.Ads
+                .Include(a => a.ImagesPaths)
+                .FirstOrDefault(a => a.Id == id);
+
+
+            return ad;
+        }
+
         public IEnumerable<Ad> GetTenOfMostVisitedAds()
         {
-            var ads = this.db.Ads.Select(a => new Ad
-            {
-                Title = a.Title,
-                Description = a.Description,
-            })
+            var ads = this.db.Ads
+                .Include(a => a.ImagesPaths)
+                .Select(a => a)
                 .ToList();
 
             return ads;
         }
 
-        public IEnumerable<AdViewModel> GetUserAds(string name) 
+        public IEnumerable<Ad> GetUserAds(string name)
         {
             var ads = this.db.Ads
                 .Where(a => a.UserProfile.Account.UserName == name)
                 .Include(a => a.ImagesPaths)
-                .Select(a => new AdViewModel 
-                {
-                Title = a.Title,
-                Description = a.Description,
-                Path = a.ImagesPaths.First().Path
-                })
                 .ToList();
 
-            foreach (var ad in ads)
-            {
-                ad.Path = GlobalConstants.cloudinary + ad.Path;
-            }
+            //ads = CreateFullUrlImage(ads).ToList();
 
             return ads;
         }

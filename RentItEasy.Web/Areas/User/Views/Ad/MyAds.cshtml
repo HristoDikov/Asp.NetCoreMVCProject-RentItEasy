@@ -1,11 +1,14 @@
-﻿@using System.Linq;
-@{
+﻿@{
     ViewData["Title"] = "My Ads";
 }
 
 <h1 class="text-center">@this.ViewData["Title"]</h1>
 
 <div class="row">
+    @*@if (!Model.Count.Any())
+    {
+        <h5 class="text-center">None</h5>
+    }*@
     @foreach (var ad in Model)
     {
         <div class="col-4" style="width: 18rem;">
@@ -13,7 +16,8 @@
             <div class="card-body">
                 <h5 class="card-title">@ad.Title</h5>
                 <p class="card-text">@ad.Description</p>
-                <a href="#" class="btn btn-primary">View Ad</a>
+                <a asp-area="User" asp-controller="Ad" asp-action="ViewAd" asp-route-id="@ad.Id"class="btn btn-primary">View Ad</a>
+
             </div>
         </div>
     }

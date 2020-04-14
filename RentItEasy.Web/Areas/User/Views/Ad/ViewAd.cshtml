@@ -1,0 +1,30 @@
+﻿@model RentItEasy.Areas.User.ViewModels.FullAdViewModel
+@{
+    ViewData["Title"] = "View Ad";
+}
+
+
+
+<form>
+    <h1 align="center">@Model.Title</h1>
+    <div>
+        <text>Rent: @Model.RentPrice</text>
+        <hr />
+        <text>Location: @Model.Location</text>
+        <hr />
+        <text>Size: @Model.Size</text>
+        <hr />
+        <text>Property Type: @Model.PropertyType</text>
+        <hr />
+        <text>Building Class: @Model.BuildingClass</text>
+        <text>Description: @Model.Description</text>
+        <hr />
+    </div>
+</form>
+
+@foreach (var imagePath in Model.ImagesPaths)
+{
+    <div class="col-4" style="width: 18rem;">
+        <img src=@imagePath.Path class="mr-10" alt="Card image cap" height="180" width="287">
+    </div>
+}

@@ -3,6 +3,8 @@
     using CloudinaryDotNet;
     using global::RentItEasy.Areas.User.ViewModels;
     using global::RentItEasy.Common;
+    using global::RentItEasy.Data.Models;
+    using global::RentItEasy.Models.ViewModels;
     using global::RentItEasy.Services;
     using global::RentItEasy.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
@@ -52,9 +54,57 @@
         {
             var currentUserProfile = this.User.Identity.Name;
 
-            var model = this.adService.GetUserAds(currentUserProfile);
+            var ads = this.adService.GetUserAds(currentUserProfile);
+
+            var model = ads
+                .Select(a => new AdViewModel
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    Path = GlobalConstants.cloudinary + a.ImagesPaths.First().Path,
+                })
+                .ToList();
+
 
             return View(model);
+        }
+
+        public IActionResult ViewAd(int id)
+        {
+            var ad = this.adService.GetAd(id);
+
+            var model = new FullAdViewModel
+            {
+                Title = ad.Title,
+                Description = ad.Description,
+                RentPrice = ad.RentPrice,
+                BuildingClass = ad.BuildingClass,
+                Location = ad.Location,
+                PropertyType = ad.PropertyType,
+                Size = ad.Size,
+            };
+
+            var imgPaths = new List<ImagePath>();
+
+            foreach (var imgPath in ad.ImagesPaths)
+            {
+                imgPaths.Add(imgPath);
+            }
+
+            model.ImagesPaths = CreateFullUrlImage(imgPaths);
+
+            return this.View(model);
+        }
+
+        private IEnumerable<ImagePath> CreateFullUrlImage(IEnumerable<ImagePath> ads)
+        {
+            foreach (var ad in ads)
+            {
+                ad.Path = GlobalConstants.cloudinary + ad.Path;
+            }
+
+            return ads;
         }
     }
 }
