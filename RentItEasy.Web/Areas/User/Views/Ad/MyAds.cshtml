@@ -1,0 +1,20 @@
+﻿@using System.Linq;
+@{
+    ViewData["Title"] = "My Ads";
+}
+
+<h1 class="text-center">@this.ViewData["Title"]</h1>
+
+<div class="row">
+    @foreach (var ad in Model)
+    {
+        <div class="col-4" style="width: 18rem;">
+            <img src=@ad.Path class="mr-10" alt="Card image cap" height="180" width="287">
+            <div class="card-body">
+                <h5 class="card-title">@ad.Title</h5>
+                <p class="card-text">@ad.Description</p>
+                <a href="#" class="btn btn-primary">View Ad</a>
+            </div>
+        </div>
+    }
+</div>

@@ -1,6 +1,8 @@
 ﻿namespace RentItEasy.Services
 {
     using Microsoft.EntityFrameworkCore;
+    using RentItEasy.Areas.User.ViewModels;
+    using RentItEasy.Common;
     using RentItEasy.Data;
     using RentItEasy.Data.Models;
     using RentItEasy.Models.Enums;
@@ -71,6 +73,27 @@
                 Description = a.Description,
             })
                 .ToList();
+
+            return ads;
+        }
+
+        public IEnumerable<AdViewModel> GetUserAds(string name) 
+        {
+            var ads = this.db.Ads
+                .Where(a => a.UserProfile.Account.UserName == name)
+                .Include(a => a.ImagesPaths)
+                .Select(a => new AdViewModel 
+                {
+                Title = a.Title,
+                Description = a.Description,
+                Path = a.ImagesPaths.First().Path
+                })
+                .ToList();
+
+            foreach (var ad in ads)
+            {
+                ad.Path = GlobalConstants.cloudinary + ad.Path;
+            }
 
             return ads;
         }

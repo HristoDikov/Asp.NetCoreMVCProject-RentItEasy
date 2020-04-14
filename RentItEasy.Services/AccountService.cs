@@ -38,6 +38,7 @@
                 Email = email,
                 UserProfileId = userProfile.Id,
                 UserProfile = userProfile,
+                PhoneNumber = userProfile.PhoneNumber,
             };
 
             var result = await userManager.CreateAsync(account, password);
