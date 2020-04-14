@@ -1,10 +1,9 @@
-﻿using AspNetCoreTemplate.Data.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using RentItEasy.Models;
-
-namespace RentItEasy.Data
+﻿namespace RentItEasy.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using RentItEasy.Data.Models;
+
     public class ApplicationDbContext : IdentityDbContext<Account>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -20,9 +19,9 @@ namespace RentItEasy.Data
 
         public DbSet<Ad> Ads { get; set; }
 
-        public DbSet<AgencyProfile> AgenciesProfiles { get; set; }
+        public DbSet<ImagePath> ImagesPaths { get; set; }
 
-        public DbSet<Property> Properties { get; set; }
+        public DbSet<AgencyProfile> AgenciesProfiles { get; set; }
 
         public DbSet<Rating> Ratings { get; set; }
 

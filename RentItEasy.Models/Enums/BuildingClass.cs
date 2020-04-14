@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreTemplate.Data.Models
+﻿namespace RentItEasy.Models.Enums
 {
     public enum BuildingClass
     {

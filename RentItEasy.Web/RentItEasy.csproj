@@ -3,7 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-RentItEasy-588AE035-0339-4E96-A1E6-96A26939CC35</UserSecretsId>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas - Copy\**" />
+    <Content Remove="Areas - Copy\**" />
+    <EmbeddedResource Remove="Areas - Copy\**" />
+    <None Remove="Areas - Copy\**" />
+  </ItemGroup>
 
 
   <ItemGroup>

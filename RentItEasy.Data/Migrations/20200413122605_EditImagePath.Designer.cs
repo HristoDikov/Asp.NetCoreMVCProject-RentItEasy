@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentItEasy.Data;
 
 namespace RentItEasy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200413122605_EditImagePath")]
+    partial class EditImagePath
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -158,7 +160,7 @@ namespace RentItEasy.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("AgencyProfileId")
+                    b.Property<string>("AgencyId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -204,12 +206,12 @@ namespace RentItEasy.Data.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
-
-                    b.Property<string>("UserProfileId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -304,9 +306,6 @@ namespace RentItEasy.Data.Migrations
 
                     b.Property<int>("AdId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -415,11 +414,11 @@ namespace RentItEasy.Data.Migrations
 
             modelBuilder.Entity("RentItEasy.Data.Models.Ad", b =>
                 {
-                    b.HasOne("RentItEasy.Data.Models.AgencyProfile", "AgencyProfile")
+                    b.HasOne("RentItEasy.Data.Models.AgencyProfile", null)
                         .WithMany("Ads")
                         .HasForeignKey("AgencyProfileId");
 
-                    b.HasOne("RentItEasy.Data.Models.UserProfile", "UserProfile")
+                    b.HasOne("RentItEasy.Data.Models.UserProfile", null)
                         .WithMany("Ads")
                         .HasForeignKey("UserProfileId");
                 });

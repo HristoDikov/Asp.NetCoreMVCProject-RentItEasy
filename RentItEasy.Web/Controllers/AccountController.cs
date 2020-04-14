@@ -74,7 +74,7 @@
                 return this.View(model);
             }
 
-            var url =  this.accountService.Login(model.Username, model.Password, model.RememberMe).Result;
+            var url = this.accountService.Login(model.Username, model.Password, model.RememberMe).Result;
 
             return this.Redirect(GlobalConstants.homeUrl);
         }

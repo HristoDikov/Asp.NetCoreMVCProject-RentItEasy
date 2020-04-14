@@ -1,7 +1,5 @@
-﻿namespace RentItEasy.Models
+﻿namespace RentItEasy.Data.Models
 {
-    using AspNetCoreTemplate.Data.Models;
-    using RentItEasy.Models.Contracts;
     using System;
     using System.Collections.Generic;
 

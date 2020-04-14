@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreTemplate.Data.Models.Enums
+﻿namespace RentItEasy.Models.Enums
 {
     public enum PropertyType
     {

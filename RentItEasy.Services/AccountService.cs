@@ -1,10 +1,9 @@
 ﻿namespace RentItEasy.Services.Contracts
 {
-    using AspNetCoreTemplate.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using RentItEasy.Common;
     using RentItEasy.Data;
-    using RentItEasy.Models;
+    using RentItEasy.Data.Models;
     using System.Threading.Tasks;
 
     public class AccountService : IAccountService
@@ -37,7 +36,7 @@
             {
                 UserName = username,
                 Email = email,
-                UserId = userProfile.Id,
+                UserProfileId = userProfile.Id,
                 UserProfile = userProfile,
             };
 
@@ -63,7 +62,7 @@
 
             var user = new Account
             {
-                AgencyId = agencyProfile.Id,
+                AgencyProfileId = agencyProfile.Id,
                 AgencyProfile = agencyProfile,
                 UserName = username,
                 Email = email,
@@ -85,7 +84,7 @@
             {
                 return GlobalConstants.homeUrl;
             }
-
+             
             return GlobalConstants.loginUrl;
         }
 

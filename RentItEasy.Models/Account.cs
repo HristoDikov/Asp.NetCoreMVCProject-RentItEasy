@@ -1,17 +1,16 @@
-﻿namespace RentItEasy.Models
+﻿namespace RentItEasy.Data.Models
 {
-    using AspNetCoreTemplate.Data.Models;
     using System;
     using Microsoft.AspNetCore.Identity;
     using RentItEasy.Models.Contracts;
 
     public class Account : IdentityUser, IAccount
     {
-        public string UserId { get; set; }
+        public string UserProfileId { get; set; }
 
         public virtual UserProfile UserProfile { get; set; }
 
-        public string AgencyId { get; set; }
+        public string AgencyProfileId { get; set; }
 
         public virtual AgencyProfile AgencyProfile { get; set; }
 

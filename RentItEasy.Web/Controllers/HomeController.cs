@@ -26,14 +26,8 @@
 
             List<AdViewModel> viewModel = adsFromService.Select(a => new AdViewModel
             {
-                Title = a.Title,
-                Description = a.Description,
-                CountOfVisits = a.CountOfVisits,
-                RentPrice = a.Property.RentPrice,
-                Size = a.Property.Size,
-                Location = a.Property.Location,
-                PropertyType = a.Property.PropertyType.ToString(),
-                BuildingClass = a.Property.BuildingClass.ToString(),
+                Title = "asd"/*a.Title*/,
+                Description = "asd"/*a.Description*/,
             }).ToList();
 
             return View(viewModel);

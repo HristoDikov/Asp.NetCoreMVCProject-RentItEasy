@@ -1,23 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
-using RentItEasy.Data;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using RentItEasy.Services;
-using RentItEasy.Models;
-using RentItEasy.Services.Contracts;
-
 namespace RentItEasy
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using CloudinaryDotNet;
+    using Services.Contracts;
+    using Services;
+    using global::RentItEasy.Data;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -34,7 +28,7 @@ namespace RentItEasy
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<Account, IdentityRole>(options =>
+            services.AddIdentity<Data.Models.Account, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 6;
@@ -44,7 +38,7 @@ namespace RentItEasy
                 options.Password.RequireUppercase = false;
             })
                .AddDefaultTokenProviders()
-               .AddEntityFrameworkStores<ApplicationDbContext>();
+               .AddEntityFrameworkStores<Data.ApplicationDbContext>();
 
             //services.AddDefaultIdentity<Account>(options => options.SignIn.RequireConfirmedAccount = false)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -53,9 +47,19 @@ namespace RentItEasy
 
             services.AddScoped<IAdService, AdService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IUploadImageService, UploadImageService>();
             services.AddRazorPages();
+
+            CloudinaryDotNet.Account account = new CloudinaryDotNet.Account(
+                            this.Configuration["Cloudinary:AppName"],
+                            this.Configuration["Cloudinary:AppKey"],
+                            this.Configuration["Cloudinary:AppSecret"]);
+
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            services.AddSingleton(cloudinary);   
         }
-       
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -82,8 +86,13 @@ namespace RentItEasy
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "areaRoute",
+                    pattern: "{area:exists}/{controller=User}/{action=Create}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
             });
         }

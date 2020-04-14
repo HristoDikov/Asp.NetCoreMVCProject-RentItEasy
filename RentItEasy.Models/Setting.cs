@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreTemplate.Data.Models
+﻿namespace RentItEasy.Data.Models
 {
     public class Setting
     {
