@@ -35,6 +35,7 @@
                 Location = location,
                 RentPrice = rentPrice,
                 UserProfileId = user.UserProfileId,
+                AgencyProfileId = user.AgencyProfileId,
             };
 
             var imagesPathsToBeAdded = CreateImagePath(stringImagesPaths, ad);
@@ -70,7 +71,6 @@
                 .Include(a => a.ImagesPaths)
                 .FirstOrDefault(a => a.Id == id);
 
-
             return ad;
         }
 
@@ -87,13 +87,30 @@
         public IEnumerable<Ad> GetUserAds(string name)
         {
             var ads = this.db.Ads
-                .Where(a => a.UserProfile.Account.UserName == name)
+                .Where(a => (a.UserProfile.Account.UserName ?? a.AgencyProfile.Account.UserName) == name)
                 .Include(a => a.ImagesPaths)
                 .ToList();
 
-            //ads = CreateFullUrlImage(ads).ToList();
-
             return ads;
+        }
+
+        public async Task EditAd(int id, string title, string description, string propertyType,
+            string size, string location, string rentPrice, string buildingClass)
+        {
+            var ad = this.db.Ads
+                .Where(a => a.Id == id)
+                .Select(a => a)
+                .FirstOrDefault();
+
+            ad.Title = title;
+            ad.Description = description;
+            ad.PropertyType = Enum.Parse<PropertyType>(propertyType);
+            ad.Size = size;
+            ad.Location = location;
+            ad.RentPrice = rentPrice;
+            ad.BuildingClass = Enum.Parse<BuildingClass>(buildingClass);
+
+            await this.db.SaveChangesAsync();
         }
     }
 }

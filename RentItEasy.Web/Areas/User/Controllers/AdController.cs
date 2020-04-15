@@ -76,6 +76,7 @@
 
             var model = new FullAdViewModel
             {
+                Id = ad.Id,
                 Title = ad.Title,
                 Description = ad.Description,
                 RentPrice = ad.RentPrice,
@@ -97,6 +98,40 @@
             return this.View(model);
         }
 
+        [HttpGet]
+        public IActionResult EditAd(int id)
+        {
+            var ad = adService.GetAd(id);
+
+            var model = new FullAdViewModel
+            {
+                Id = ad.Id,
+                Title = ad.Title,
+                Description = ad.Description,
+                RentPrice = ad.RentPrice,
+                BuildingClass = ad.BuildingClass,
+                Location = ad.Location,
+                PropertyType = ad.PropertyType,
+                Size = ad.Size,
+            };
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditAd(CreateAdInputModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            await adService.EditAd(model.Id, model.Title, model.Description, model.PropertyType, model.Size, 
+                model.Location, model.RentPrice, model.BuildingClass);
+
+            return this.Redirect(GlobalConstants.homeUrl);
+
+        }
         private IEnumerable<ImagePath> CreateFullUrlImage(IEnumerable<ImagePath> ads)
         {
             foreach (var ad in ads)
@@ -106,5 +141,6 @@
 
             return ads;
         }
+
     }
 }

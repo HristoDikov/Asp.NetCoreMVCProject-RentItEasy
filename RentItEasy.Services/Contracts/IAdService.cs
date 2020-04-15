@@ -14,5 +14,8 @@
         IEnumerable<Ad> GetUserAds(string name);
 
         Ad GetAd(int id);
+
+        Task EditAd(int id, string title, string description, string propertyType,
+            string size, string location, string rentPrice, string buildingClass);
     }
 }

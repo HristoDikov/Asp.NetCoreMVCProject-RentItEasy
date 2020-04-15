@@ -15,9 +15,8 @@
             <img src=@ad.Path class="mr-10" alt="Card image cap" height="180" width="287">
             <div class="card-body">
                 <h5 class="card-title">@ad.Title</h5>
-                <p class="card-text">@ad.Description</p>
+                <p class="card-text">@ad.MinimizedDescription</p>
                 <a asp-area="User" asp-controller="Ad" asp-action="ViewAd" asp-route-id="@ad.Id"class="btn btn-primary">View Ad</a>
-
             </div>
         </div>
     }

@@ -1,10 +1,9 @@
 ﻿@using RentItEasy.Models.Enums
-@using RentItEasy.Areas.User.ViewModels.Enums
 @model RentItEasy.Areas.User.ViewModels.CreateAdInputModel
-
 @{
     ViewData["Title"] = "Create";
 }
+
 <form enctype="multipart/form-data" asp-controller="Ad" asp-action="Create">
     <div class="form-group">
         <label asp-for="Title"></label>
