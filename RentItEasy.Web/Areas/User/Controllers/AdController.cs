@@ -7,6 +7,7 @@
     using global::RentItEasy.Models.ViewModels;
     using global::RentItEasy.Services;
     using global::RentItEasy.Services.Contracts;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Linq;
@@ -15,9 +16,9 @@
     [Area("User")]
     public class AdController : Controller
     {
-        private IAdService adService;
-        private IUploadImageService uploadImageadService;
-        private Cloudinary cloudinary;
+        private readonly IAdService adService;
+        private readonly IUploadImageService uploadImageadService;
+        private readonly Cloudinary cloudinary;
 
         public AdController(IUploadImageService uploadImageadService, Cloudinary cloudinary, IAdService adService)
         {
@@ -33,6 +34,8 @@
             return View();
         }
 
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateAdInputModel model)
         {
             if (!this.ModelState.IsValid)
@@ -47,29 +50,26 @@
             await this.adService.CreateAd(userName, model.Title, model.Description, stringImagesPaths, model.PropertyType,
                 model.Size, model.Location, model.RentPrice, model.BuildingClass);
 
-            return this.Redirect(GlobalConstants.homeUrl);
+            var ads = this.adService.GetUserAds(userName);
+            var minimizedAds = AdToMinimizedAdViewModel(ads);
+
+            return this.View("MyAds", minimizedAds);
         }
 
+        [HttpGet]
         public IActionResult MyAds()
         {
             var currentUserProfile = this.User.Identity.Name;
 
             var ads = this.adService.GetUserAds(currentUserProfile);
 
-            var model = ads
-                .Select(a => new AdViewModel
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    Description = a.Description,
-                    Path = GlobalConstants.cloudinary + a.ImagesPaths.First().Path,
-                })
-                .ToList();
-
+            var model = AdToMinimizedAdViewModel(ads);
 
             return View(model);
         }
 
+        [HttpGet]
+        [Authorize]
         public IActionResult ViewAd(int id)
         {
             var ad = this.adService.GetAd(id);
@@ -99,6 +99,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult EditAd(int id)
         {
             var ad = adService.GetAd(id);
@@ -119,6 +120,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> EditAd(CreateAdInputModel model)
         {
             if (!this.ModelState.IsValid)
@@ -129,9 +131,22 @@
             await adService.EditAd(model.Id, model.Title, model.Description, model.PropertyType, model.Size, 
                 model.Location, model.RentPrice, model.BuildingClass);
 
-            return this.Redirect(GlobalConstants.homeUrl);
+            var currentUserProfile = this.User.Identity.Name;
+            var ads = this.adService.GetUserAds(currentUserProfile);
+            var minimizedAds = AdToMinimizedAdViewModel(ads);
 
+            return this.View("MyAds", minimizedAds);
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> DeleteAd(int id)
+        {
+            await adService.DeleteAd(id);
+
+            return this.Redirect(GlobalConstants.homeUrl);
+        }
+
         private IEnumerable<ImagePath> CreateFullUrlImage(IEnumerable<ImagePath> ads)
         {
             foreach (var ad in ads)
@@ -140,6 +155,26 @@
             }
 
             return ads;
+        }
+
+        private IEnumerable<AdViewModel> AdToMinimizedAdViewModel(IEnumerable<Ad> ads)
+        {
+            var minimizedAds = new List<AdViewModel>();
+
+            foreach (var ad in ads)
+            {
+                var minimizedAd = new AdViewModel
+                {
+                    Id = ad.Id,
+                    Title = ad.Title,
+                    Description = ad.Description,
+                    Path = GlobalConstants.cloudinary + ad.ImagesPaths.First().Path
+                };
+
+                minimizedAds.Add(minimizedAd);
+            }
+
+            return minimizedAds;
         }
 
     }

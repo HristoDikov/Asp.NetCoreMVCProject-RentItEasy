@@ -112,5 +112,17 @@
 
             await this.db.SaveChangesAsync();
         }
+
+        public async Task DeleteAd(int id)
+        {
+            var ad = this.db.Ads
+           .Where(a => a.Id == id)
+           .Select(a => a)
+           .FirstOrDefault();
+
+            this.db.Ads.Remove(ad);
+
+            await this.db.SaveChangesAsync();
+        }
     }
 }
