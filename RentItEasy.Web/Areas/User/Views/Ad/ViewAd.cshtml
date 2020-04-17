@@ -2,13 +2,15 @@
 @{
     ViewData["Title"] = "View Ad";
 }
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
 <h1 align="center">@Model.Title</h1>
 
 <div class="row">
     @foreach (var imagePath in Model.ImagesPaths)
     {
-
         <div class="col-md-4" style="width: 18rem;">
             <img src=@imagePath.Path class="mr-10" alt="Card image cap" height="180" width="287">
         </div>
@@ -30,12 +32,29 @@
         <text>Building Class: @Model.BuildingClass</text>
         <hr />
         <text>Description: @Model.Description</text>
+
+        <ul class="list-inline list-unstyled text-right">
+            <li class="list-inline-item">
+                <i class="fas fa-user-edit"></i> @Model.MadeBy
+            </li>
+            <li class="list-inline-item">
+                <i class="fas fa-calendar-alt"></i> @Model.CreatedOn
+            </li>
+            @*<li class="list-inline-item">
+                <i class="fas fa-comment-dots"></i>
+            </li>*@
+        </ul>
     </div>
 </form>
 
-<div class="row">
-    <div style="width:70px" class="col">
-        <a asp-area="User" asp-controller="Ad" asp-action="EditAd" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-        <a asp-area="User" asp-controller="Ad" asp-action="DeleteAd" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+@if (this.User.Identity.Name == Model.MadeBy)
+{
+    <div class="row">
+        <div style="width:70px" class="col">
+            <a asp-area="User" asp-controller="Ad" asp-action="EditAd" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+            <a asp-area="User" asp-controller="Ad" asp-action="DeleteAd" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        </div>
     </div>
-</div>
+}
+
+

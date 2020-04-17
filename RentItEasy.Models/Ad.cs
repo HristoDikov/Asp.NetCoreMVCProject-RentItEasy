@@ -1,6 +1,7 @@
 ﻿namespace RentItEasy.Data.Models
 {
     using RentItEasy.Models.Enums;
+    using System;
     using System.Collections.Generic;
 
     public class Ad
@@ -24,6 +25,8 @@
         public PropertyType PropertyType { get; set; }
 
         public BuildingClass BuildingClass { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public string UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }

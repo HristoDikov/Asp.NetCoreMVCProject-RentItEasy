@@ -26,6 +26,7 @@
 
             var userProfile = new UserProfile
             {
+                Username = username,
                 FirstName = firstName,
                 LastName = lastName,
                 PhoneNumber = phoneNumber,
@@ -39,6 +40,7 @@
                 UserProfileId = userProfile.Id,
                 UserProfile = userProfile,
                 PhoneNumber = userProfile.PhoneNumber,
+                IsUserProfile = true,
             };
 
             var result = await userManager.CreateAsync(account, password);
@@ -56,6 +58,7 @@
 
             var agencyProfile = new AgencyProfile
             {
+                Username = username,
                 Address = address,
                 PhoneNumber = phoneNumber,
                 Rating = rating,
@@ -67,6 +70,7 @@
                 AgencyProfile = agencyProfile,
                 UserName = username,
                 Email = email,
+                IsUserProfile = false,
             };
             
             await userManager.CreateAsync(user, password);

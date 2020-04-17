@@ -2,11 +2,14 @@
 {
     using Data.Models;
     using Models.Enums;
+    using System;
     using System.Collections.Generic;
 
     public class FullAdViewModel
     {
         public int Id { get;set; }
+
+        public string MadeBy { get; set; }
 
         public string Title { get; set; }
 
@@ -17,6 +20,8 @@
         public string Location { get; set; }
 
         public string RentPrice { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public PropertyType PropertyType { get; set; }
 

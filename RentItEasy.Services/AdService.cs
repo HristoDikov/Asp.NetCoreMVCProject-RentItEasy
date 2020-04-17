@@ -34,6 +34,7 @@
                 Size = size,
                 Location = location,
                 RentPrice = rentPrice,
+                CreatedOn = DateTime.UtcNow,
                 UserProfileId = user.UserProfileId,
                 AgencyProfileId = user.AgencyProfileId,
             };
@@ -69,6 +70,8 @@
         {
             var ad = this.db.Ads
                 .Include(a => a.ImagesPaths)
+                .Include(a => a.AgencyProfile)
+                .Include(a => a.UserProfile)
                 .FirstOrDefault(a => a.Id == id);
 
             return ad;

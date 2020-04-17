@@ -35,7 +35,6 @@
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Create(CreateAdInputModel model)
         {
             if (!this.ModelState.IsValid)
@@ -69,14 +68,14 @@
         }
 
         [HttpGet]
-        [Authorize]
         public IActionResult ViewAd(int id)
         {
             var ad = this.adService.GetAd(id);
 
             var model = new FullAdViewModel
             {
-                Id = ad.Id,
+                Id = ad.Id, 
+                MadeBy = ad.AgencyProfile == null ? ad.UserProfile.Username ?? ad.AgencyProfile.Username : ad.AgencyProfile.Username,
                 Title = ad.Title,
                 Description = ad.Description,
                 RentPrice = ad.RentPrice,
@@ -84,6 +83,7 @@
                 Location = ad.Location,
                 PropertyType = ad.PropertyType,
                 Size = ad.Size,
+                CreatedOn = ad.CreatedOn,
             };
 
             var imgPaths = new List<ImagePath>();
@@ -99,7 +99,6 @@
         }
 
         [HttpGet]
-        [Authorize]
         public IActionResult EditAd(int id)
         {
             var ad = adService.GetAd(id);
@@ -139,7 +138,6 @@
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> DeleteAd(int id)
         {
             await adService.DeleteAd(id);
