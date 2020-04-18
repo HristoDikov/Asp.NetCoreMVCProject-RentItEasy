@@ -1,0 +1,31 @@
+﻿@model RentItEasy.Areas.User.ViewModels.AppointmentInputModel
+@{
+    ViewData["Title"] = "Make Appointment";
+}
+<form asp-area="User" asp-controller="Appointment" asp-action="CreateAppointment" method="post">
+    <div>
+        <h5 class="text-center">Choose a time for your appointment:</h5>
+        <hr />
+        <div class="form-group">
+            <label asp-for="AppointmentDate" class="control-label"></label>
+            <input asp-for="AppointmentDate" class="form-control" />
+            <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+        </div>
+
+        <input type="hidden" value=@ViewBag.Id asp-for="AdId" />
+
+        <text style="color:red">
+            *Please, note that you must select a date, atleast 1 day ahead of now and maximum 10 days ahead of now.
+            Every other date will be invalid.
+        </text>
+        <hr/>
+        <text>
+            After you submit the date, the private lessor or the agency will call you for further information.
+        </text>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+
+    </div>
+</form>

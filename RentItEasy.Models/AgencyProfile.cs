@@ -10,6 +10,7 @@
         public AgencyProfile()
         {
             this.Ads = new HashSet<Ad>();
+            this.Appointments = new HashSet<Appointment>();
             this.Id = Guid.NewGuid().ToString();
         }
 
@@ -29,6 +30,8 @@
 
         public virtual Account Account { get; set; }
 
-        public virtual HashSet<Ad> Ads { get; set; }
+        public virtual IEnumerable<Ad> Ads { get; set; }
+
+        public virtual IEnumerable<Appointment> Appointments { get; set; }
     }
 }

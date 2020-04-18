@@ -48,6 +48,7 @@ namespace RentItEasy
             services.AddScoped<IAdService, AdService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUploadImageService, UploadImageService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddRazorPages();
 
             CloudinaryDotNet.Account account = new CloudinaryDotNet.Account(

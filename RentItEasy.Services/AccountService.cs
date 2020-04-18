@@ -4,6 +4,7 @@
     using RentItEasy.Common;
     using RentItEasy.Data;
     using RentItEasy.Data.Models;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class AccountService : IAccountService
@@ -96,6 +97,23 @@
         public async Task Logout()
         {
             await this.signInManager.SignOutAsync();
+        }
+
+        public UserProfile GetUserByUsername(string username) 
+        {
+            var user = this.db.UsersProfiles
+                .Where(a => a.Username == username)
+                .FirstOrDefault();
+
+            return user;
+        }
+        public AgencyProfile GetAgencyByUsername(string username)
+        {
+            var agency = this.db.AgenciesProfiles
+                .Where(a => a.Username == username)
+                .FirstOrDefault();
+
+            return agency;
         }
     }
 }

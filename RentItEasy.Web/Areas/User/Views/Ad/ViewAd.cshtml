@@ -11,9 +11,9 @@
 <div class="row">
     @foreach (var imagePath in Model.ImagesPaths)
     {
-        <div class="col-md-4" style="width: 18rem;">
-            <img src=@imagePath.Path class="mr-10" alt="Card image cap" height="180" width="287">
-        </div>
+    <div class="col-md-4" style="width: 18rem;">
+        <img src=@imagePath.Path class="mr-10" alt="Card image cap" height="180" width="287">
+    </div>
     }
 </div>
 
@@ -41,20 +41,47 @@
                 <i class="fas fa-calendar-alt"></i> @Model.CreatedOn
             </li>
             @*<li class="list-inline-item">
-                <i class="fas fa-comment-dots"></i>
-            </li>*@
+                    <i class="fas fa-comment-dots"></i>
+                </li>*@
         </ul>
     </div>
 </form>
 
 @if (this.User.Identity.Name == Model.MadeBy)
 {
-    <div class="row">
-        <div style="width:70px" class="col">
-            <a asp-area="User" asp-controller="Ad" asp-action="EditAd" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-            <a asp-area="User" asp-controller="Ad" asp-action="DeleteAd" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-        </div>
+<div class="row">
+    <div style="width:70px" class="col">
+        <a asp-area="User" asp-controller="Ad" asp-action="EditAd" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-area="User" asp-controller="Ad" asp-action="DeleteAd" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
     </div>
+</div>
 }
+else
+{
+<div>
+    <a asp-area="User" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-id="@Model.Id" class="btn btn-primary">Make Appointment</a>
+</div>
+}
+
+@*<div id="makeAppointmentDiv" style="display: none">
+    <h5 class="text-center">Choose a time for your appointment:</h5>
+    <hr />
+    <div class="form-group">
+        <label asp-for="appointment.AppointmentDate" class="control-label"></label>
+        <input asp-for="appointment.AppointmentDate" class="form-control" />
+        <span asp-validation-for="appointment.AppointmentDate" class="text-danger"></span>
+    </div>
+</div>*@
+
+
+@*<script>
+    var makeAppointment = document.getElementById("makeAppointment");
+    makeAppointment.onclick = ShowMakeAppointment;
+
+    function ShowMakeAppointment() {
+        document.getElementById("makeAppointmentDiv").style.display = "block";
+    }
+
+</script>*@
 
 

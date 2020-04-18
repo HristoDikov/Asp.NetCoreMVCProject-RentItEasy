@@ -1,5 +1,6 @@
 ﻿namespace RentItEasy.Services.Contracts
 {
+    using RentItEasy.Data.Models;
     using System.Threading.Tasks;
     public interface IAccountService
     {
@@ -8,6 +9,10 @@
         Task CreateAgency(string username, string email, string address, string phoneNumber, string password);
 
         Task<string> Login(string email, string password, bool rememberMe);
+
+        UserProfile GetUserByUsername(string username);
+
+        AgencyProfile GetAgencyByUsername(string username);
 
         Task Logout();
     }

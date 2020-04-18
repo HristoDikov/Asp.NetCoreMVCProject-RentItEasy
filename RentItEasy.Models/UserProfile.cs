@@ -8,6 +8,7 @@
         public UserProfile()
         {
             this.Ads = new HashSet<Ad>();
+            this.Appointments = new HashSet<Appointment>();
             this.Id = Guid.NewGuid().ToString();
         }
         public string Id { get; set; }
@@ -28,6 +29,8 @@
 
         public virtual Rating Rating { get; set; }
 
-        public virtual HashSet<Ad> Ads { get; set; }
+        public IEnumerable<Appointment> Appointments { get; set; }
+
+        public virtual IEnumerable<Ad> Ads { get; set; }
     }
 }

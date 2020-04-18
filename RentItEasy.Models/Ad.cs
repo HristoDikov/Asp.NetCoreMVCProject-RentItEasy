@@ -9,6 +9,7 @@
         public Ad()
         {
             this.ImagesPaths = new HashSet<ImagePath>();
+            this.Appointments = new HashSet<Appointment>();
         }
         public int Id { get; set; }
 
@@ -33,6 +34,8 @@
 
         public string AgencyProfileId { get; set; }
         public AgencyProfile AgencyProfile { get; set; }
+
+        public IEnumerable<Appointment> Appointments { get; set; }
 
         public virtual IEnumerable<ImagePath> ImagesPaths { get; set; }
     }

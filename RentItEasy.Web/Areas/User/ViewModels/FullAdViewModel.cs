@@ -7,7 +7,7 @@
 
     public class FullAdViewModel
     {
-        public int Id { get;set; }
+        public int Id { get; set; }
 
         public string MadeBy { get; set; }
 

@@ -17,6 +17,8 @@
 
         public DbSet<Account> Accounts { get; set; }
 
+        public DbSet<Appointment> Appointments { get; set; }
+
         public DbSet<Ad> Ads { get; set; }
 
         public DbSet<ImagePath> ImagesPaths { get; set; }
