@@ -10,8 +10,8 @@ using RentItEasy.Data;
 namespace RentItEasy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200413121841_Test")]
-    partial class Test
+    [Migration("20200419134410_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -160,7 +160,7 @@ namespace RentItEasy.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("AgencyId")
+                    b.Property<string>("AgencyProfileId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -175,6 +175,9 @@ namespace RentItEasy.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUserProfile")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -206,12 +209,12 @@ namespace RentItEasy.Data.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
+
+                    b.Property<string>("UserProfileId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -238,6 +241,9 @@ namespace RentItEasy.Data.Migrations
 
                     b.Property<int>("BuildingClass")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -286,6 +292,9 @@ namespace RentItEasy.Data.Migrations
                     b.Property<string>("RatingId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId")
@@ -297,23 +306,23 @@ namespace RentItEasy.Data.Migrations
                     b.ToTable("AgenciesProfiles");
                 });
 
-            modelBuilder.Entity("RentItEasy.Data.Models.ImagePath", b =>
+            modelBuilder.Entity("RentItEasy.Data.Models.Appointment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AdId")
+                    b.Property<int?>("AdId")
                         .HasColumnType("int");
-
-                    b.Property<string>("AgencyId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AgencyProfileId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("UserId")
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OwnerOfAdId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserProfileId")
@@ -326,6 +335,26 @@ namespace RentItEasy.Data.Migrations
                     b.HasIndex("AgencyProfileId");
 
                     b.HasIndex("UserProfileId");
+
+                    b.ToTable("Appointments");
+                });
+
+            modelBuilder.Entity("RentItEasy.Data.Models.ImagePath", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AdId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdId");
 
                     b.ToTable("ImagesPaths");
                 });
@@ -365,6 +394,9 @@ namespace RentItEasy.Data.Migrations
 
                     b.Property<string>("RatingId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -430,11 +462,11 @@ namespace RentItEasy.Data.Migrations
 
             modelBuilder.Entity("RentItEasy.Data.Models.Ad", b =>
                 {
-                    b.HasOne("RentItEasy.Data.Models.AgencyProfile", null)
+                    b.HasOne("RentItEasy.Data.Models.AgencyProfile", "AgencyProfile")
                         .WithMany("Ads")
                         .HasForeignKey("AgencyProfileId");
 
-                    b.HasOne("RentItEasy.Data.Models.UserProfile", null)
+                    b.HasOne("RentItEasy.Data.Models.UserProfile", "UserProfile")
                         .WithMany("Ads")
                         .HasForeignKey("UserProfileId");
                 });
@@ -450,6 +482,21 @@ namespace RentItEasy.Data.Migrations
                         .HasForeignKey("RatingId");
                 });
 
+            modelBuilder.Entity("RentItEasy.Data.Models.Appointment", b =>
+                {
+                    b.HasOne("RentItEasy.Data.Models.Ad", "Ad")
+                        .WithMany("Appointments")
+                        .HasForeignKey("AdId");
+
+                    b.HasOne("RentItEasy.Data.Models.AgencyProfile", null)
+                        .WithMany("Appointments")
+                        .HasForeignKey("AgencyProfileId");
+
+                    b.HasOne("RentItEasy.Data.Models.UserProfile", "UserProfile")
+                        .WithMany("Appointments")
+                        .HasForeignKey("UserProfileId");
+                });
+
             modelBuilder.Entity("RentItEasy.Data.Models.ImagePath", b =>
                 {
                     b.HasOne("RentItEasy.Data.Models.Ad", "Ad")
@@ -457,14 +504,6 @@ namespace RentItEasy.Data.Migrations
                         .HasForeignKey("AdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("RentItEasy.Data.Models.AgencyProfile", "AgencyProfile")
-                        .WithMany()
-                        .HasForeignKey("AgencyProfileId");
-
-                    b.HasOne("RentItEasy.Data.Models.UserProfile", "UserProfile")
-                        .WithMany()
-                        .HasForeignKey("UserProfileId");
                 });
 
             modelBuilder.Entity("RentItEasy.Data.Models.UserProfile", b =>

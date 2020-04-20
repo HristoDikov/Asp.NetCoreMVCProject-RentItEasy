@@ -10,8 +10,8 @@ using RentItEasy.Data;
 namespace RentItEasy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200413190908_EditAccount")]
-    partial class EditAccount
+    [Migration("20200419141947_EditAppointment")]
+    partial class EditAppointment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -177,6 +177,9 @@ namespace RentItEasy.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsUserProfile")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -239,6 +242,9 @@ namespace RentItEasy.Data.Migrations
                     b.Property<int>("BuildingClass")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -286,6 +292,9 @@ namespace RentItEasy.Data.Migrations
                     b.Property<string>("RatingId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId")
@@ -295,6 +304,36 @@ namespace RentItEasy.Data.Migrations
                     b.HasIndex("RatingId");
 
                     b.ToTable("AgenciesProfiles");
+                });
+
+            modelBuilder.Entity("RentItEasy.Data.Models.Appointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AdId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AgencyProfileId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserProfileId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdId");
+
+                    b.HasIndex("AgencyProfileId");
+
+                    b.HasIndex("UserProfileId");
+
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("RentItEasy.Data.Models.ImagePath", b =>
@@ -352,6 +391,9 @@ namespace RentItEasy.Data.Migrations
 
                     b.Property<string>("RatingId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -435,6 +477,23 @@ namespace RentItEasy.Data.Migrations
                     b.HasOne("RentItEasy.Data.Models.Rating", "Rating")
                         .WithMany()
                         .HasForeignKey("RatingId");
+                });
+
+            modelBuilder.Entity("RentItEasy.Data.Models.Appointment", b =>
+                {
+                    b.HasOne("RentItEasy.Data.Models.Ad", "Ad")
+                        .WithMany("Appointments")
+                        .HasForeignKey("AdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RentItEasy.Data.Models.AgencyProfile", "AgencyProfile")
+                        .WithMany("Appointments")
+                        .HasForeignKey("AgencyProfileId");
+
+                    b.HasOne("RentItEasy.Data.Models.UserProfile", "UserProfile")
+                        .WithMany("Appointments")
+                        .HasForeignKey("UserProfileId");
                 });
 
             modelBuilder.Entity("RentItEasy.Data.Models.ImagePath", b =>

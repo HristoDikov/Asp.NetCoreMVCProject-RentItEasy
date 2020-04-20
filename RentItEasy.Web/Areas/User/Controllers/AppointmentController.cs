@@ -6,6 +6,7 @@
     using global::RentItEasy.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     [Area("User")]
@@ -48,9 +49,9 @@
             var username = this.User.Identity.Name;
             var ad = adService.GetAd(model.AdId);
             var userProfile = accountService.GetUserByUsername(username);
-            var agencyProfile = accountService.GetAgencyByUsername(username);
+            var agencyProfile = accountService.GetAgencyByUsername(ad.AgencyProfileId);
 
-            appointmentService.Create(ad, userProfile, agencyProfile, model.AppointmentDate);
+            appointmentService.Create(ad, userProfile, agencyProfile, model.AppointmentDate, username);
 
             return this.Redirect(GlobalConstants.homeUrl);
         }

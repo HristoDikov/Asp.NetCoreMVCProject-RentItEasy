@@ -1,0 +1,27 @@
+﻿@model IEnumerable<RentItEasy.Areas.User.ViewModels.AppointmentViewModel>
+@{
+    ViewData["Title"] = "Get Appointments";
+}
+
+    <div class="row">
+        @if (!Model.Any())
+        {
+            <h5 class="text-center">None</h5>
+        }
+        else
+        {
+            @foreach (var appointment in Model)
+            {
+                <div class="form-control-range">
+                    <text>Which property: @appointment.Title</text>
+                    <hr />
+                    <text>Viewer Name: @appointment.UserFirstName @appointment.UserLastName</text>
+                    <hr />
+                    <text>Viewer Phone: @appointment.PhoneNumber</text>
+                    <hr />
+                    <a asp-area="Agency" asp-controller="Appointment" asp-action="Arranged" asp-route-id="@appointment.Id" class="btn btn-primary" style="right:auto">Arranged</a>
+                </div>
+            }
+        }
+
+    </div>

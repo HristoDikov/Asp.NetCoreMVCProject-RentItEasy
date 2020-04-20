@@ -21,9 +21,8 @@
         public async Task CreateAd(string userName, string title, string description, IEnumerable<string> stringImagesPaths, string propertyType,
             string size, string location, string rentPrice, string buildingClass)
         {
-            var user = this.db.Users
-                 .Include(x => x.UserProfile)
-                .FirstOrDefault(x => x.UserName == userName);
+            var user = this.db.AgenciesProfiles
+                .FirstOrDefault(x => x.Username == userName);
 
             var ad = new Ad
             {
@@ -35,8 +34,7 @@
                 Location = location,
                 RentPrice = rentPrice,
                 CreatedOn = DateTime.UtcNow,
-                UserProfileId = user.UserProfileId,
-                AgencyProfileId = user.AgencyProfileId,
+                AgencyProfileId = user.Id,
             };
 
             var imagesPathsToBeAdded = CreateImagePath(stringImagesPaths, ad);
@@ -71,7 +69,6 @@
             var ad = this.db.Ads
                 .Include(a => a.ImagesPaths)
                 .Include(a => a.AgencyProfile)
-                .Include(a => a.UserProfile)
                 .FirstOrDefault(a => a.Id == id);
 
             return ad;
@@ -87,10 +84,10 @@
             return ads;
         }
 
-        public IEnumerable<Ad> GetUserAds(string name)
+        public IEnumerable<Ad> GetAgencyAds(string name)
         {
             var ads = this.db.Ads
-                .Where(a => (a.UserProfile.Account.UserName ?? a.AgencyProfile.Account.UserName) == name)
+                .Where(a => a.AgencyProfile.Username == name)
                 .Include(a => a.ImagesPaths)
                 .ToList();
 

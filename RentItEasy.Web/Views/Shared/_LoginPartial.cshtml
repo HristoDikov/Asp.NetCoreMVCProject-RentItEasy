@@ -9,10 +9,13 @@
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-controller="Ad" asp-action="Create" asp-area="User">Create Ad</a>
+                <a class="nav-link text-dark" asp-controller="Ad" asp-action="Create" asp-area="Agency">Create Ad</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link text-dark" asp-controller="Ad" asp-action="MyAds" asp-area="User">My Ads</a>
+                <a class="nav-link text-dark" asp-controller="Ad" asp-action="MyAds" asp-area="Agency">My Ads</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Appointment" asp-action="GetAppointments" asp-area="Agency">My Appointments</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>

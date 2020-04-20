@@ -8,9 +8,9 @@
     {
         public string UserProfileId { get; set; }
 
-        public bool IsUserProfile { get; set; }
-
         public virtual UserProfile UserProfile { get; set; }
+
+        public bool IsUserProfile { get; set; }
 
         public string AgencyProfileId { get; set; }
 

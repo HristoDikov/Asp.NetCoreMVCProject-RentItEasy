@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RentItEasy.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,30 +40,14 @@ namespace RentItEasy.Data.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
-                    AgencyId = table.Column<string>(nullable: true),
+                    UserProfileId = table.Column<string>(nullable: true),
+                    IsUserProfile = table.Column<bool>(nullable: false),
+                    AgencyProfileId = table.Column<string>(nullable: true),
                     CreatedOn = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Properties",
-                columns: table => new
-                {
-                    PropertyId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PropertyType = table.Column<int>(nullable: false),
-                    Size = table.Column<int>(nullable: false),
-                    Location = table.Column<string>(nullable: true),
-                    RentPrice = table.Column<decimal>(nullable: false),
-                    BuildingClass = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Properties", x => x.PropertyId);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,8 +109,8 @@ namespace RentItEasy.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -170,8 +154,8 @@ namespace RentItEasy.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -190,6 +174,7 @@ namespace RentItEasy.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    Username = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     RatingId = table.Column<string>(nullable: true),
@@ -217,6 +202,7 @@ namespace RentItEasy.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    Username = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
@@ -248,11 +234,14 @@ namespace RentItEasy.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    Image = table.Column<byte[]>(nullable: true),
-                    CountOfVisits = table.Column<int>(nullable: false),
-                    PropertyId = table.Column<int>(nullable: false),
-                    AgencyProfileId = table.Column<string>(nullable: true),
-                    UserProfileId = table.Column<string>(nullable: true)
+                    Size = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true),
+                    RentPrice = table.Column<string>(nullable: true),
+                    PropertyType = table.Column<int>(nullable: false),
+                    BuildingClass = table.Column<int>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    UserProfileId = table.Column<string>(nullable: true),
+                    AgencyProfileId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -264,12 +253,6 @@ namespace RentItEasy.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Ads_Properties_PropertyId",
-                        column: x => x.PropertyId,
-                        principalTable: "Properties",
-                        principalColumn: "PropertyId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Ads_UsersProfiles_UserProfileId",
                         column: x => x.UserProfileId,
                         principalTable: "UsersProfiles",
@@ -277,15 +260,65 @@ namespace RentItEasy.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Appointments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(nullable: false),
+                    AdId = table.Column<int>(nullable: true),
+                    UserProfileId = table.Column<string>(nullable: true),
+                    OwnerOfAdId = table.Column<string>(nullable: true),
+                    AgencyProfileId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Appointments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Ads_AdId",
+                        column: x => x.AdId,
+                        principalTable: "Ads",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Appointments_AgenciesProfiles_AgencyProfileId",
+                        column: x => x.AgencyProfileId,
+                        principalTable: "AgenciesProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Appointments_UsersProfiles_UserProfileId",
+                        column: x => x.UserProfileId,
+                        principalTable: "UsersProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ImagesPaths",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Path = table.Column<string>(nullable: true),
+                    AdId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImagesPaths", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ImagesPaths_Ads_AdId",
+                        column: x => x.AdId,
+                        principalTable: "Ads",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Ads_AgencyProfileId",
                 table: "Ads",
                 column: "AgencyProfileId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ads_PropertyId",
-                table: "Ads",
-                column: "PropertyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ads_UserProfileId",
@@ -303,6 +336,21 @@ namespace RentItEasy.Data.Migrations
                 name: "IX_AgenciesProfiles_RatingId",
                 table: "AgenciesProfiles",
                 column: "RatingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_AdId",
+                table: "Appointments",
+                column: "AdId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_AgencyProfileId",
+                table: "Appointments",
+                column: "AgencyProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_UserProfileId",
+                table: "Appointments",
+                column: "UserProfileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -344,6 +392,11 @@ namespace RentItEasy.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ImagesPaths_AdId",
+                table: "ImagesPaths",
+                column: "AdId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UsersProfiles_AccountId",
                 table: "UsersProfiles",
                 column: "AccountId",
@@ -359,7 +412,7 @@ namespace RentItEasy.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Ads");
+                name: "Appointments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -377,16 +430,19 @@ namespace RentItEasy.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AgenciesProfiles");
-
-            migrationBuilder.DropTable(
-                name: "Properties");
-
-            migrationBuilder.DropTable(
-                name: "UsersProfiles");
+                name: "ImagesPaths");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Ads");
+
+            migrationBuilder.DropTable(
+                name: "AgenciesProfiles");
+
+            migrationBuilder.DropTable(
+                name: "UsersProfiles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

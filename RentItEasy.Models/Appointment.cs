@@ -10,8 +10,14 @@ namespace RentItEasy.Data.Models
 
         public virtual Ad Ad { get; set; }
 
+        public int AdId { get; set; }
+
         public virtual UserProfile UserProfile { get; set; }
 
+        public string UserProfileId { get; set; }
+
         public virtual AgencyProfile AgencyProfile { get; set; }
+
+        public string AgencyProfileId { get;set; }
     }
 }

@@ -107,10 +107,10 @@
 
             return user;
         }
-        public AgencyProfile GetAgencyByUsername(string username)
+        public AgencyProfile GetAgencyByUsername(string id)
         {
             var agency = this.db.AgenciesProfiles
-                .Where(a => a.Username == username)
+                .Where(a => a.Id == id)
                 .FirstOrDefault();
 
             return agency;

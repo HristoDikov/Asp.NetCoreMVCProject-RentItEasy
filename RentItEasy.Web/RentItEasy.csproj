@@ -33,4 +33,9 @@
     <ProjectReference Include="..\RentItEasy.Services\RentItEasy.Services.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Areas\Agency\Data\" />
+  </ItemGroup>
+
 </Project>

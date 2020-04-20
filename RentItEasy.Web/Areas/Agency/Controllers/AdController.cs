@@ -1,19 +1,19 @@
-﻿namespace RentItEasy.Areas.User.Controllers
+﻿namespace RentItEasy.Areas.Agency.Controllers
 {
     using CloudinaryDotNet;
-    using global::RentItEasy.Areas.User.ViewModels;
-    using global::RentItEasy.Common;
-    using global::RentItEasy.Data.Models;
-    using global::RentItEasy.Models.ViewModels;
-    using global::RentItEasy.Services;
-    using global::RentItEasy.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Areas.User.ViewModels;
+    using Common;
+    using Data.Models;
+    using Services;
+    using Services.Contracts;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    [Area("User")]
+    [Area("Agency")]
     public class AdController : Controller
     {
         private readonly IAdService adService;
@@ -49,7 +49,7 @@
             await this.adService.CreateAd(userName, model.Title, model.Description, stringImagesPaths, model.PropertyType,
                 model.Size, model.Location, model.RentPrice, model.BuildingClass);
 
-            var ads = this.adService.GetUserAds(userName);
+            var ads = this.adService.GetAgencyAds(userName);
             var minimizedAds = AdToMinimizedAdViewModel(ads);
 
             return this.View("MyAds", minimizedAds);
@@ -60,7 +60,7 @@
         {
             var currentUserProfile = this.User.Identity.Name;
 
-            var ads = this.adService.GetUserAds(currentUserProfile);
+            var ads = this.adService.GetAgencyAds(currentUserProfile);
 
             var model = AdToMinimizedAdViewModel(ads);
 
@@ -74,7 +74,7 @@
 
             var model = new FullAdViewModel
             {
-                Id = ad.Id, 
+                Id = ad.Id,
                 MadeBy = ad.AgencyProfile == null ? ad.UserProfile.Username ?? ad.AgencyProfile.Username : ad.AgencyProfile.Username,
                 Title = ad.Title,
                 Description = ad.Description,
@@ -127,11 +127,11 @@
                 return this.View(model);
             }
 
-            await adService.EditAd(model.Id, model.Title, model.Description, model.PropertyType, model.Size, 
+            await adService.EditAd(model.Id, model.Title, model.Description, model.PropertyType, model.Size,
                 model.Location, model.RentPrice, model.BuildingClass);
 
             var currentUserProfile = this.User.Identity.Name;
-            var ads = this.adService.GetUserAds(currentUserProfile);
+            var ads = this.adService.GetAgencyAds(currentUserProfile);
             var minimizedAds = AdToMinimizedAdViewModel(ads);
 
             return this.View("MyAds", minimizedAds);
@@ -141,6 +141,7 @@
         public async Task<IActionResult> DeleteAd(int id)
         {
             await adService.DeleteAd(id);
+
 
             return this.Redirect(GlobalConstants.homeUrl);
         }

@@ -11,7 +11,7 @@
         Task CreateAd(string userName, string title, string description, IEnumerable<string> imagesPath,
             string propertyType, string size, string location, string rentPrice, string buildingClass);
 
-        IEnumerable<Ad> GetUserAds(string name);
+        IEnumerable<Ad> GetAgencyAds(string name);
 
         Ad GetAd(int id);
 

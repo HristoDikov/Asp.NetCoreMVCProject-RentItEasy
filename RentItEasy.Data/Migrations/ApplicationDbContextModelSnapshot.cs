@@ -311,7 +311,7 @@ namespace RentItEasy.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AdId")
+                    b.Property<int>("AdId")
                         .HasColumnType("int");
 
                     b.Property<string>("AgencyProfileId")
@@ -481,7 +481,9 @@ namespace RentItEasy.Data.Migrations
                 {
                     b.HasOne("RentItEasy.Data.Models.Ad", "Ad")
                         .WithMany("Appointments")
-                        .HasForeignKey("AdId");
+                        .HasForeignKey("AdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("RentItEasy.Data.Models.AgencyProfile", "AgencyProfile")
                         .WithMany("Appointments")
