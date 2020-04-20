@@ -70,15 +70,16 @@
                 .Include(a => a.ImagesPaths)
                 .Include(a => a.AgencyProfile)
                 .FirstOrDefault(a => a.Id == id);
-
+            
             return ad;
         }
 
-        public IEnumerable<Ad> GetTenOfMostVisitedAds()
+        public IEnumerable<Ad> GetTenAds()
         {
             var ads = this.db.Ads
                 .Include(a => a.ImagesPaths)
                 .Select(a => a)
+                .Take(10)
                 .ToList();
 
             return ads;

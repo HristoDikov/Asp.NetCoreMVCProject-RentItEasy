@@ -44,6 +44,7 @@
         {
             await this.appointmentService.DeleteAppointment(id);
 
+            //TODO
             return this.RedirectToAction("GetAppointments");
         }
     }

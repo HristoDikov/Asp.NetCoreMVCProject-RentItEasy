@@ -16,6 +16,12 @@
     </div>
 
     <div class="input-container">
+        <i class="fa fa-user icon"></i>
+        <input class="input-field" asp-for="Name" placeholder="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="input-container">
         <i class="fa fa-phone icon"></i>
         <input class="input-field" asp-for="PhoneNumber" placeholder="Phone number">
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>

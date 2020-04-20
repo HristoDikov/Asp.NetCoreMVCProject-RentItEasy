@@ -6,7 +6,7 @@
 
     public interface IAdService
     {
-        IEnumerable<Ad> GetTenOfMostVisitedAds();
+        IEnumerable<Ad> GetTenAds();
 
         Task CreateAd(string userName, string title, string description, IEnumerable<string> imagesPath,
             string propertyType, string size, string location, string rentPrice, string buildingClass);

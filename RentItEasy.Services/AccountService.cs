@@ -9,15 +9,18 @@
 
     public class AccountService : IAccountService
     {
-        private ApplicationDbContext db;
-        private UserManager<Account> userManager;
-        private SignInManager<Account> signInManager;
+        private readonly ApplicationDbContext db;
+        private readonly UserManager<Account> userManager;
+        private readonly SignInManager<Account> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public AccountService(ApplicationDbContext db, UserManager<Account> userManager, SignInManager<Account> signInManager)
+        public AccountService(ApplicationDbContext db, UserManager<Account> userManager,
+            SignInManager<Account> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.db = db;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
         }
 
         public async Task CreateUser(string username, string firstName, string lastName, string email,
@@ -31,7 +34,6 @@
                 FirstName = firstName,
                 LastName = lastName,
                 PhoneNumber = phoneNumber,
-                Rating = rating,
             };
 
             var account = new Account
@@ -41,19 +43,43 @@
                 UserProfileId = userProfile.Id,
                 UserProfile = userProfile,
                 PhoneNumber = userProfile.PhoneNumber,
-                IsUserProfile = true,
             };
 
             var result = await userManager.CreateAsync(account, password);
 
-            userProfile.AccountId = account.Id;
-            userProfile.Account = account;
+            if (result.Succeeded)
+            {
+                await CreateRole(GlobalConstants.userRoleName, account);
 
-            await db.SaveChangesAsync();
+                userProfile.AccountId = account.Id;
+                userProfile.Account = account;
+
+                await db.SaveChangesAsync();
+            }
+        }
+        public async Task CreateRole(string roleName, Account user)
+        {
+            bool roleExists = await roleManager.RoleExistsAsync(roleName);
+
+            if (!roleExists)
+            {
+                var role = new IdentityRole
+                {
+                    Name = roleName
+                };
+
+                var createRole = await roleManager.CreateAsync(role);
+
+                if (createRole.Succeeded)
+                {
+                    var result = await userManager.AddToRoleAsync(user, roleName);
+                }
+            }
+
+            var results = await userManager.AddToRoleAsync(user, roleName);
         }
 
-
-        public async Task CreateAgency(string username, string email, string address, string phoneNumber, string password)
+        public async Task CreateAgency(string username, string name, string email, string address, string phoneNumber, string password)
         {
             var rating = new Rating();
 
@@ -63,23 +89,27 @@
                 Address = address,
                 PhoneNumber = phoneNumber,
                 Rating = rating,
+                Name = name,
             };
 
-            var user = new Account
+            var account = new Account
             {
                 AgencyProfileId = agencyProfile.Id,
                 AgencyProfile = agencyProfile,
                 UserName = username,
                 Email = email,
-                IsUserProfile = false,
             };
             
-            await userManager.CreateAsync(user, password);
+            var result = await userManager.CreateAsync(account, password);
 
-            agencyProfile.AccountId = user.Id;
-            agencyProfile.Account = user;
+            if (result.Succeeded)
+            {
+                await CreateRole(GlobalConstants.agencyRoleName, account);
+                agencyProfile.AccountId = account.Id;
+                agencyProfile.Account = account;
 
-            await db.SaveChangesAsync();
+                await db.SaveChangesAsync();
+            }
         }
 
         public async Task<string> Login(string email, string password, bool rememberMe)

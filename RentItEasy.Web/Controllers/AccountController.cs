@@ -37,7 +37,7 @@
             await this.accountService.CreateUser(model.Username, model.FirstName, model.LastName, 
                 model.Email, model.PhoneNumber, model.Password);
 
-            return this.Redirect(GlobalConstants.homeUrl);
+            return this.Redirect(GlobalConstants.loginUrl);
         }
 
         [HttpGet]
@@ -55,7 +55,7 @@
                 return this.View(model);
             }
 
-            await accountService.CreateAgency(model.Username, model.Email, model.Address,
+            await accountService.CreateAgency(model.Username, model.Name, model.Email, model.Address,
                 model.PhoneNumber, model.Password);
 
             return this.Redirect(GlobalConstants.homeUrl);

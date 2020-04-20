@@ -25,10 +25,6 @@
 
         public virtual Account Account { get; set; }
 
-        public string RatingId { get; set; }
-
-        public virtual Rating Rating { get; set; }
-
         public IEnumerable<Appointment> Appointments { get; set; }
 
         public virtual IEnumerable<Ad> Ads { get; set; }

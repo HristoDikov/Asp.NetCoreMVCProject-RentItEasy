@@ -13,6 +13,9 @@ namespace RentItEasy.RentItEasy.Web.ViewModels.Account
         public string Username { get; set; }
 
         [Required]
+        public string Name { get; set; }
+
+        [Required]
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
 

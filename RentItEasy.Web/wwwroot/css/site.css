@@ -17,6 +17,7 @@ a {
     background-color: #1b6ec2;
     border-color: #1861ac;
     margin: 10px;
+    position: center;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -114,6 +115,7 @@ body {
     width: 100%;
     opacity: 0.9;
     margin:10px;
+    position:center
 }
 
     .btn:hover {
