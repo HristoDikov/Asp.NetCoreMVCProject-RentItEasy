@@ -26,7 +26,8 @@ namespace RentItEasy
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")),
+                    ServiceLifetime.Transient);
 
             services.AddIdentity<Data.Models.Account, IdentityRole>(options =>
             {

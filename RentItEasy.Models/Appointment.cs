@@ -18,6 +18,7 @@ namespace RentItEasy.Data.Models
 
         public virtual AgencyProfile AgencyProfile { get; set; }
 
-        public string AgencyProfileId { get;set; }
+        public string AgencyProfileId { get; set; }
+
     }
 }

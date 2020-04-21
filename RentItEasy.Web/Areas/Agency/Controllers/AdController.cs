@@ -75,7 +75,6 @@
             var model = new FullAdViewModel
             {
                 Id = ad.Id,
-                MadeBy = ad.AgencyProfile == null ? ad.UserProfile.Username ?? ad.AgencyProfile.Username : ad.AgencyProfile.Username,
                 Title = ad.Title,
                 Description = ad.Description,
                 RentPrice = ad.RentPrice,

@@ -79,7 +79,7 @@
             var results = await userManager.AddToRoleAsync(user, roleName);
         }
 
-        public async Task CreateAgency(string username, string name, string email, string address, string phoneNumber, string password)
+        public async Task CreateAgency(string username, string description, string name, string email, string address, string phoneNumber, string password)
         {
             var rating = new Rating();
 
@@ -90,6 +90,7 @@
                 PhoneNumber = phoneNumber,
                 Rating = rating,
                 Name = name,
+                Description = description,
             };
 
             var account = new Account
@@ -129,22 +130,6 @@
             await this.signInManager.SignOutAsync();
         }
 
-        public UserProfile GetUserByUsername(string username) 
-        {
-            var user = this.db.UsersProfiles
-                .Where(a => a.Username == username)
-                .FirstOrDefault();
-
-            return user;
-        }
-        public AgencyProfile GetAgencyByUsername(string id)
-        {
-            var agency = this.db.AgenciesProfiles
-                .Where(a => a.Id == id)
-                .FirstOrDefault();
-
-            return agency;
-        }
     }
 }
 

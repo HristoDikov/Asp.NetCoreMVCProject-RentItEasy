@@ -1,17 +1,59 @@
-﻿@{
+﻿@model RentItEasy.Areas.User.ViewModels.AgencyProfileViewModel
+@{
     ViewData["Title"] = "Details";
 }
+<head>
+    <!-- Font Awesome Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
+</head>
 
 <form>
     <div>
-        <text>Rent: @Model.Name</text>
+        <h3 class="text-center">@Model.Name</h3>
         <hr />
-        <text>Location: @Model.Description</text>
+        <text>Description: @Model.Description</text>
         <hr />
-        <text>Size: @Model.Address</text>
+        <text>Address: @Model.Address</text>
         <hr />
-        <text>Property Type: @Model.PhoneNumber</text>
+        <text>Phone number: @Model.PhoneNumber</text>
         <hr />
-        <text class="text-right">Rating: @Model.Rating</text>
     </div>
 </form>
+<div class="col">
+    @for (int i = 0; i < 5; i++)
+    {
+        if (i < Model.Rating.AverageRating)
+        {
+            <span class="fa fa-star checked"></span>
+        }
+        else
+        {
+            <span class="fa fa-star"></span>
+        }
+
+    }
+
+    <p>Rating: @Model.Rating.AverageRating.ToString("F1") average based on @Model.Rating.CountOfVotes reviews.</p>
+
+    @if (Model.Rating.VotedUsers.Where(a => a.UserProfile.Username == this.User.Identity.Name).FirstOrDefault() != null)
+    {
+        <p style="color:red">*You already Voted</p>
+    }
+    else
+    {
+        <form asp-area="User" asp-controller="Profile" asp-action="Details" asp-route-Id="@Model.Id" method="post">
+            <input type="number" min="0" max="5" step="1" asp-for="@Model.RateDigit" class="form-control mytext" />
+            <span asp-validation-for="@Model.RateDigit" class="text-danger"></span>
+            <input name="agencyId" hidden value="@Model.Id" />
+            <div class="form-group">
+                <input type="submit" value="Rate" class="btn btn-default" />
+            </div>
+        </form>
+    }
+
+</div>

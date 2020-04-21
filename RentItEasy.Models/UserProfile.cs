@@ -10,6 +10,7 @@
             this.Ads = new HashSet<Ad>();
             this.Appointments = new HashSet<Appointment>();
             this.Id = Guid.NewGuid().ToString();
+            this.Ratings = new HashSet<UserRating>();
         }
         public string Id { get; set; }
 
@@ -26,6 +27,8 @@
         public virtual Account Account { get; set; }
 
         public IEnumerable<Appointment> Appointments { get; set; }
+
+        public ICollection<UserRating> Ratings { get; set; }
 
         public virtual IEnumerable<Ad> Ads { get; set; }
     }

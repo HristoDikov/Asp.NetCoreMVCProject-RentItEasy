@@ -12,6 +12,10 @@ namespace RentItEasy.RentItEasy.Web.ViewModels.Account
         [StringLength(20, ErrorMessage = "Username must be at least {2} and maximum {1} characters long.", MinimumLength = 5)]
         public string Username { get; set; }
 
+
+        [Required]
+        public string Description { get; set; }
+
         [Required]
         public string Name { get; set; }
 

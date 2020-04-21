@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentItEasy.Data;
 
 namespace RentItEasy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200421122705_AddUserRating")]
+    partial class AddUserRating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -396,6 +398,9 @@ namespace RentItEasy.Data.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("RatingId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
@@ -404,6 +409,8 @@ namespace RentItEasy.Data.Migrations
                     b.HasIndex("AccountId")
                         .IsUnique()
                         .HasFilter("[AccountId] IS NOT NULL");
+
+                    b.HasIndex("RatingId");
 
                     b.ToTable("UsersProfiles");
                 });
@@ -532,16 +539,20 @@ namespace RentItEasy.Data.Migrations
                     b.HasOne("RentItEasy.Data.Models.Account", "Account")
                         .WithOne("UserProfile")
                         .HasForeignKey("RentItEasy.Data.Models.UserProfile", "AccountId");
+
+                    b.HasOne("RentItEasy.Data.Models.Rating", null)
+                        .WithMany("VotedUsers")
+                        .HasForeignKey("RatingId");
                 });
 
             modelBuilder.Entity("RentItEasy.Data.Models.UserRating", b =>
                 {
                     b.HasOne("RentItEasy.Data.Models.Rating", "Rating")
-                        .WithMany("VotedUsers")
+                        .WithMany()
                         .HasForeignKey("RatingId");
 
                     b.HasOne("RentItEasy.Data.Models.UserProfile", "UserProfile")
-                        .WithMany("Ratings")
+                        .WithMany()
                         .HasForeignKey("UserProfileId");
                 });
 #pragma warning restore 612, 618

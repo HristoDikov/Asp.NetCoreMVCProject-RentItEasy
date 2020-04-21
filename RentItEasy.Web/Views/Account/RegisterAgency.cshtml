@@ -22,6 +22,12 @@
     </div>
 
     <div class="input-container">
+        <i class="fa fa-user icon"></i>
+        <input class="input-field" asp-for="Description" placeholder="Description">
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="input-container">
         <i class="fa fa-phone icon"></i>
         <input class="input-field" asp-for="PhoneNumber" placeholder="Phone number">
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>

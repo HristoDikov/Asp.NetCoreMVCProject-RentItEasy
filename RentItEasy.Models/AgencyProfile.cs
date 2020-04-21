@@ -36,6 +36,6 @@
 
         public virtual IEnumerable<Ad> Ads { get; set; }
 
-        public virtual IEnumerable<Appointment> Appointments { get; set; }
+        public virtual HashSet<Appointment> Appointments { get; set; }
     }
 }

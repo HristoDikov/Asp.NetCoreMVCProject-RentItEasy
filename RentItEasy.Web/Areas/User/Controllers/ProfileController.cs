@@ -4,6 +4,7 @@
     using global::RentItEasy.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
+    using System.Linq;
 
     [Area("User")]
     public class ProfileController : Controller
@@ -40,14 +41,29 @@
 
             var agencyDetails = new AgencyProfileViewModel
             {
+                Id = agency.Id,
                 Name = agency.Name,
                 Description = agency.Description,
                 Address = agency.Address,
                 PhoneNumber = agency.PhoneNumber,
-                Rating = agency.Rating == null ? "No rating yet" : agency.Rating.AverageRating.ToString(),
+                Rating = agency.Rating,
             };
-
+            
             return this.View(agencyDetails);
+        }
+
+        [HttpPost]
+        public IActionResult Details(string agencyId, decimal rateDigit)
+        {
+            var currentUserUsername = this.User.Identity.Name;
+
+            var userProfile = this.profileService.GetUserByUsername(currentUserUsername);
+
+            var agencyProfile = this.profileService.GetAgencyById(agencyId);
+
+            this.profileService.Rate(userProfile, agencyProfile, rateDigit);
+
+            return this.Details(agencyId);
         }
     }
 }

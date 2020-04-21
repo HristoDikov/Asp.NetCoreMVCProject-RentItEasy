@@ -4,6 +4,8 @@ namespace RentItEasy.Areas.User.ViewModels
 {
     public class AgencyProfileViewModel
     {
+        public string Id { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -12,6 +14,8 @@ namespace RentItEasy.Areas.User.ViewModels
 
         public string PhoneNumber { get; set; }
 
-        public string Rating { get; set; }
+        public Rating Rating { get; set; }
+
+        public decimal RateDigit { get; set; }
     }
 }

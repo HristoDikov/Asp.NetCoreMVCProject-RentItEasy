@@ -70,7 +70,7 @@
                 .Include(a => a.ImagesPaths)
                 .Include(a => a.AgencyProfile)
                 .FirstOrDefault(a => a.Id == id);
-            
+
             return ad;
         }
 

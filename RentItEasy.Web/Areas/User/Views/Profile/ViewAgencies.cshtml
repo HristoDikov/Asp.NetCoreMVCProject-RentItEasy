@@ -7,8 +7,8 @@
     {
     <div class="col-4">
         <div class="card-body">
-            <h5 class="card-title">Agency name:@agency.Name</h5>
-            <p class="card-text">Minimized Description: @agency.MinimizedDescription</p>
+            <h5 class="card-title">@agency.Name</h5>
+            <p class="card-text">@agency.MinimizedDescription</p>
             <text class="text-right">Rating: @agency.Rating</text>
             <a asp-area="User" asp-controller="Profile" asp-action="Details" asp-route-id="@agency.Id" class="btn btn-primary">Details</a>
         </div>

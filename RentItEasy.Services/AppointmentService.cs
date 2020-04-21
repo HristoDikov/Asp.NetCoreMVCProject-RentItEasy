@@ -17,15 +17,15 @@
             this.db = db;
         }
 
-        public void Create(Ad ad, UserProfile userProfile, AgencyProfile agencyProfile, DateTime date, string username)
+        public void Create(Ad ad, UserProfile userProfile, AgencyProfile agencyProfile, DateTime date)
         {
-            var userProfileId = this.db.UsersProfiles.Where(a => a.Username == username).FirstOrDefault();
+            
             Appointment appointment = new Appointment
             {
-                Ad = ad,
+                AdId = ad.Id,
                 Date = date,
-                AgencyProfileId = ad.AgencyProfileId,
-                UserProfileId = userProfileId.Id,
+                UserProfileId = userProfile.Id,
+                AgencyProfileId = agencyProfile.Id,
             };
 
             this.db.Appointments.Add(appointment);
@@ -40,6 +40,7 @@
 
             var agencyApp = this.db.Appointments
                 .Include(a => a.Ad)
+                .Include(a => a.AgencyProfile)
                 .Include(a => a.UserProfile)
                 .Where(a => a.AgencyProfileId == agency.Id)
                 .Select(a => a)

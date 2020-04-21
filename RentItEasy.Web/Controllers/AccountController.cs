@@ -55,7 +55,7 @@
                 return this.View(model);
             }
 
-            await accountService.CreateAgency(model.Username, model.Name, model.Email, model.Address,
+            await accountService.CreateAgency(model.Username, model.Description, model.Name, model.Email, model.Address,
                 model.PhoneNumber, model.Password);
 
             return this.Redirect(GlobalConstants.homeUrl);

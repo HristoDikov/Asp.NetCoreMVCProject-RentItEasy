@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Make Appointment";
 }
-<form asp-area="Agency" asp-controller="Appointment" asp-action="CreateAppointment" method="post">
+<form asp-area="User" asp-controller="Appointment" asp-action="CreateAppointment" method="post">
     <div>
         <h5 class="text-center">Choose a time for your appointment:</h5>
         <hr />
@@ -18,7 +18,7 @@
             *Please, note that you must select a date, atleast 1 day ahead of now and maximum 10 days ahead of now.
             Every other date will be invalid.
         </text>
-        <hr/>
+        <hr />
         <text>
             After you submit the date, the private lessor or the agency will call you for further information.
         </text>

@@ -14,13 +14,15 @@
     {
         private readonly IAppointmentService appointmentService;
         private readonly IAccountService accountService;
+        private readonly IProfileService profileService;
         private readonly IAdService adService;
 
-        public AppointmentController(IAppointmentService appointmentService, IAccountService accountService, IAdService adService)
+        public AppointmentController(IProfileService profileService, IAppointmentService appointmentService, IAccountService accountService, IAdService adService)
         {
             this.appointmentService = appointmentService;
             this.accountService = accountService;
             this.adService = adService;
+            this.profileService = profileService;
         }
 
         [HttpGet]
@@ -48,10 +50,10 @@
 
             var username = this.User.Identity.Name;
             var ad = adService.GetAd(model.AdId);
-            var userProfile = accountService.GetUserByUsername(username);
-            var agencyProfile = accountService.GetAgencyByUsername(ad.AgencyProfileId);
+            var userProfile = profileService.GetUserByUsername(username);
+            var agencyProfile = profileService.GetAgencyById(ad.AgencyProfileId);
 
-            appointmentService.Create(ad, userProfile, agencyProfile, model.AppointmentDate, username);
+            appointmentService.Create(ad, userProfile, agencyProfile, model.AppointmentDate);
 
             return this.Redirect(GlobalConstants.homeUrl);
         }
