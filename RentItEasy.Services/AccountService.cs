@@ -125,6 +125,21 @@
             return GlobalConstants.loginUrl;
         }
 
+        public bool CheckIfUsernameIsAvailable(string username) 
+        {
+            var existingUsername = this.db.Accounts
+                .Where(a => a.UserName == username)
+                .Select(a => a.UserName)
+                .FirstOrDefault();
+
+            if (existingUsername != null)
+            {
+                return true;
+            }
+
+            return true;
+        }
+
         public async Task Logout()
         {
             await this.signInManager.SignOutAsync();

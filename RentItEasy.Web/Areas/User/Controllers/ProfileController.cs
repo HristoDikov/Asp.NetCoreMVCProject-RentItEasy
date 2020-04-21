@@ -1,12 +1,15 @@
 ﻿namespace RentItEasy.Areas.User.Controllers
 {
     using global::RentItEasy.Areas.User.ViewModels;
+    using global::RentItEasy.Common;
     using global::RentItEasy.Services.Contracts;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Linq;
 
-    [Area("User")]
+    [Area(GlobalConstants.userRoleName)]
+    [Authorize(Roles = GlobalConstants.userRoleName)]
     public class ProfileController : Controller
     {
         private readonly IProfileService profileService;

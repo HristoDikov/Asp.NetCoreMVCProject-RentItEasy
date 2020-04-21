@@ -44,6 +44,10 @@
                    .HasOne(a => a.UserProfile)
                    .WithOne(u => u.Account)
                    .HasForeignKey<UserProfile>(u => u.AccountId);
+
+            builder.Entity<Account>()
+                   .HasIndex(a => a.UserName)
+                   .IsUnique();
         }
     }
 }

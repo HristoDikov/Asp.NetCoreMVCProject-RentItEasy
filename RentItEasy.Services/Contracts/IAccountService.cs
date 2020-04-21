@@ -13,6 +13,8 @@
 
         Task<string> Login(string email, string password, bool rememberMe);
 
+        bool CheckIfUsernameIsAvailable(string username);
+
         Task Logout();
     }
 }

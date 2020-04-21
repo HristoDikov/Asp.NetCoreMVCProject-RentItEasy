@@ -4,12 +4,14 @@
     using global::RentItEasy.Common;
     using global::RentItEasy.Services;
     using global::RentItEasy.Services.Contracts;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    [Area("User")]
+    [Area(GlobalConstants.userRoleName)]
+    [Authorize(Roles = GlobalConstants.userRoleName)]
     public class AppointmentController : Controller
     {
         private readonly IAppointmentService appointmentService;

@@ -7,8 +7,8 @@
         public const string homeUrl = "/";
         public const string loginUrl = "/Account/Login";
         public const string cloudinary = "https://res.cloudinary.com";
-        public const string agencyRoleName = "Company";
-        public const string adminRoleName = "Admin";
+        public const string agencyRoleName = "Agency";
+        public const string adminRoleName = "Admin"; 
     }
 }
 

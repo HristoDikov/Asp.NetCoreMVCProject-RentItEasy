@@ -33,6 +33,11 @@
             {
                 return this.View(model);
             }
+            if (accountService.CheckIfUsernameIsAvailable(model.Username))
+            {
+                ModelState.AddModelError("Username", "Username already exists.");
+                return View(model);
+            }
 
             await this.accountService.CreateUser(model.Username, model.FirstName, model.LastName, 
                 model.Email, model.PhoneNumber, model.Password);

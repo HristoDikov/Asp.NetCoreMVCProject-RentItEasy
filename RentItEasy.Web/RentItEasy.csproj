@@ -35,7 +35,8 @@
 
 
   <ItemGroup>
-    <Folder Include="Areas\Agency\Data\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Views\" />
   </ItemGroup>
 
 </Project>

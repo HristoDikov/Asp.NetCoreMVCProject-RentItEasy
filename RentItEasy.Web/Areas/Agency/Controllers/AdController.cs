@@ -13,7 +13,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    [Area("Agency")]
+    [Area(GlobalConstants.agencyRoleName)]
     public class AdController : Controller
     {
         private readonly IAdService adService;
@@ -29,12 +29,14 @@
 
 
         [HttpGet]
+        [Authorize(Roles = GlobalConstants.agencyRoleName)]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = GlobalConstants.agencyRoleName)]
         public async Task<IActionResult> Create(CreateAdInputModel model)
         {
             if (!this.ModelState.IsValid)
@@ -56,6 +58,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = GlobalConstants.agencyRoleName)]
         public IActionResult MyAds()
         {
             var currentUserProfile = this.User.Identity.Name;
@@ -68,6 +71,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = GlobalConstants.userRoleName)]
         public IActionResult ViewAd(int id)
         {
             var ad = this.adService.GetAd(id);
@@ -75,6 +79,7 @@
             var model = new FullAdViewModel
             {
                 Id = ad.Id,
+                MadeBy = ad.AgencyProfile.Username,
                 Title = ad.Title,
                 Description = ad.Description,
                 RentPrice = ad.RentPrice,
@@ -82,7 +87,7 @@
                 Location = ad.Location,
                 PropertyType = ad.PropertyType,
                 Size = ad.Size,
-                CreatedOn = ad.CreatedOn,
+                CreatedOn = ad.CreatedOn.ToString("MM/dd/yyyy"),
             };
 
             var imgPaths = new List<ImagePath>();
@@ -98,6 +103,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = GlobalConstants.agencyRoleName)]
         public IActionResult EditAd(int id)
         {
             var ad = adService.GetAd(id);
@@ -118,7 +124,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.agencyRoleName)]
         public async Task<IActionResult> EditAd(CreateAdInputModel model)
         {
             if (!this.ModelState.IsValid)
@@ -137,6 +143,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = GlobalConstants.agencyRoleName)]
         public async Task<IActionResult> DeleteAd(int id)
         {
             await adService.DeleteAd(id);
