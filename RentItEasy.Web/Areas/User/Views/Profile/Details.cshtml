@@ -47,11 +47,11 @@
     else
     {
         <form asp-area="User" asp-controller="Profile" asp-action="Details" asp-route-Id="@Model.Id" method="post">
-            <input type="number" min="0" max="5" step="1" asp-for="@Model.RateDigit" class="form-control mytext" />
+            <input style="width:auto" type="number" min="0" max="5" step="1" asp-for="@Model.RateDigit" class="form-control mytext" />
             <span asp-validation-for="@Model.RateDigit" class="text-danger"></span>
             <input name="agencyId" hidden value="@Model.Id" />
             <div class="form-group">
-                <input type="submit" value="Rate" class="btn btn-default" />
+                <input style="width:auto" type="submit" value="Rate" class="btn btn-default" />
             </div>
         </form>
     }

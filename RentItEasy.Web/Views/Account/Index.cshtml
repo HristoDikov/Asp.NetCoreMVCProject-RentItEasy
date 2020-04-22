@@ -1,5 +1,4 @@
-﻿
-<header>
+﻿<header>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="~/css/register.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -8,9 +7,35 @@
 
 <div class="container-fluid row">
     <div class="col-md-6">
-        <a asp-controller="Account" asp-action="RegisterUser" class="btn btn-secondary btn-lg btn-block" role="button" aria-pressed="true">Register as User</a>
+        <button id="registerAsUser" class="btn btn-secondary btn-lg btn-block" role="button" aria-pressed="true">Register as User</button>
     </div>
+
     <div class="col-md-6">
-        <a asp-controller="Account" asp-action="RegisterAgency" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">Register as Agency</a>
+        <button id="registerAsAgency" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">Register as Agency</button>
     </div>
 </div>
+
+<div id="registerAsUserDiv" style="display:none">
+    <partial name="RegisterUser" model="@Model">
+</div>
+
+<div id="registerAsAgencyDiv" style="display:none">
+    <partial name="RegisterAgency" model="@Model">
+</div>
+
+<script>
+    var registerAsUser = document.getElementById("registerAsUser");
+    registerAsUser.onclick = showRegisterAsUser;
+    var registerAsAgency = document.getElementById("registerAsAgency");
+    registerAsAgency.onclick = showRegisterAsAgency;
+
+    function showRegisterAsUser() {
+        document.getElementById("registerAsAgencyDiv").style.display = "none";
+        document.getElementById("registerAsUserDiv").style.display = "block";
+    }
+
+    function showRegisterAsAgency() {
+        document.getElementById("registerAsAgencyDiv").style.display = "block";
+        document.getElementById("registerAsUserDiv").style.display = "none";
+    }
+</script>

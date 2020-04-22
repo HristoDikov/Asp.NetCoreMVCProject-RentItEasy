@@ -3,7 +3,7 @@
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Areas.User.ViewModels;
+    using Areas.Agency.ViewModels;
     using Common;
     using Data.Models;
     using Services;
@@ -71,8 +71,8 @@
         }
 
         [HttpGet]
-        [Authorize(Roles = GlobalConstants.userRoleName)]
-        public IActionResult ViewAd(int id)
+        [Authorize]
+       public IActionResult ViewAd(int id)
         {
             var ad = this.adService.GetAd(id);
 

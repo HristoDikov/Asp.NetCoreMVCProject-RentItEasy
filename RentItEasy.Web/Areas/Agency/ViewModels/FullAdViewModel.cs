@@ -1,4 +1,4 @@
-﻿namespace RentItEasy.Areas.User.ViewModels
+﻿namespace RentItEasy.Areas.Agency.ViewModels
 {
     using Data.Models;
     using Models.Enums;

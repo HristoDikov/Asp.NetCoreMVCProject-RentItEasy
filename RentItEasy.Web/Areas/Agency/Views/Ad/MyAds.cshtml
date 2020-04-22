@@ -1,14 +1,16 @@
-﻿@{
+﻿@model IEnumerable<RentItEasy.Areas.Agency.ViewModels.AdViewModel>
+@using System.Linq;
+@{
     ViewData["Title"] = "My Ads";
 }
 
 <h1 class="text-center">@this.ViewData["Title"]</h1>
 
 <div class="row">
-    @*@if (!Model.Count.Any())
+    @if (!Model.Any())
     {
         <h5 class="text-center">None</h5>
-    }*@
+    }
     @foreach (var ad in Model)
     {
         <div class="col-4" style="width: 18rem;">
@@ -16,7 +18,7 @@
             <div class="card-body">
                 <h5 class="card-title">@ad.Title</h5>
                 <p class="card-text">@ad.MinimizedDescription</p>
-                <a asp-area="Agency" asp-controller="Ad" asp-action="ViewAd" asp-route-id="@ad.Id"class="btn btn-primary">Full Ad</a>
+                <a asp-area="Agency" asp-controller="Ad" asp-action="ViewAd" asp-route-id="@ad.Id" class="btn btn-primary">Full Ad</a>
             </div>
         </div>
     }

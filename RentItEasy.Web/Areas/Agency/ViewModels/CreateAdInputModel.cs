@@ -1,4 +1,4 @@
-﻿namespace RentItEasy.Areas.User.ViewModels
+﻿namespace RentItEasy.Areas.Agency.ViewModels
 {
     using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;
@@ -15,11 +15,13 @@
         [Required]
         public string Description { get; set; }
 
+        [Required]
         public ICollection<IFormFile> Images { get; set; }
 
         [Display(Name = "Property Type")]
         public string PropertyType { get; set; }
 
+        [Required]
         public string Size { get; set; }
 
         [Required]

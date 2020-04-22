@@ -2,6 +2,7 @@
 {
     using System.Diagnostics;
     using System.Linq;
+    using global::RentItEasy.Areas.Agency.ViewModels;
     using global::RentItEasy.Areas.User.ViewModels;
     using global::RentItEasy.Common;
     using global::RentItEasy.Models;
@@ -30,7 +31,8 @@
                 Description = a.Description,
                 Path = GlobalConstants.cloudinary + a.ImagesPaths.First().Path,
                 Id = a.Id,
-            }).ToList();
+            })
+                .ToList();
 
             return View(viewModel);
         }

@@ -14,9 +14,11 @@ namespace RentItEasy.RentItEasy.Web.ViewModels.Account
 
 
         [Required]
+        [StringLength(1000, ErrorMessage = "Description must be atleast {2} and maximum {1} characters long.", MinimumLength = 30)]
         public string Description { get; set; }
 
         [Required]
+        [MinLength(5)]
         public string Name { get; set; }
 
         [Required]

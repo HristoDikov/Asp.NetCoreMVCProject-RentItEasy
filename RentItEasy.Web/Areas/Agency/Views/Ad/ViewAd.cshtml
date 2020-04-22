@@ -1,4 +1,4 @@
-﻿@model RentItEasy.Areas.User.ViewModels.FullAdViewModel
+﻿@model RentItEasy.Areas.Agency.ViewModels.FullAdViewModel
 @{
     ViewData["Title"] = "View Ad";
 }
@@ -40,9 +40,6 @@
             <li class="list-inline-item">
                 <i class="fas fa-calendar-alt"></i> @Model.CreatedOn
             </li>
-            @*<li class="list-inline-item">
-                    <i class="fas fa-comment-dots"></i>
-                </li>*@
         </ul>
     </div>
 </form>
@@ -59,7 +56,7 @@
 else
 {
 <div>
-    <a asp-area="User" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-id="@Model.Id" class="btn btn-primary">Make Appointment</a>
+    <a style="width:auto" asp-area="User" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-id="@Model.Id" class="btn btn-primary">Make Appointment</a>
 </div>
 }
 

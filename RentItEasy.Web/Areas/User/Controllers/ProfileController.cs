@@ -13,10 +13,12 @@
     public class ProfileController : Controller
     {
         private readonly IProfileService profileService;
+
         public ProfileController(IProfileService profileService)
         {
             this.profileService = profileService;
         }
+
         public IActionResult ViewAgencies()
         {
             var agencies = profileService.GetAgencies();

@@ -1,5 +1,5 @@
 ﻿@using RentItEasy.Common
-@model List<RentItEasy.Areas.User.ViewModels.AdViewModel>
+@model List<RentItEasy.Areas.Agency.ViewModels.AdViewModel>
 @{
     this.ViewData["Title"] = $"Welcome to {GlobalConstants.SystemName}";
 }
@@ -14,7 +14,7 @@
             <div class="card-body">
                 <h5 class="card-title">@ad.Title</h5>
                 <p class="card-text">@ad.MinimizedDescription</p>
-                <a asp-area="Agency" asp-controller="Ad" asp-action="ViewAd" asp-route-id="@ad.Id" class="btn btn-primary">View Full Ad</a>
+                <a style="width:auto" asp-area="Agency" asp-controller="Ad" asp-action="ViewAd" asp-route-id="@ad.Id" class="btn btn-primary">View Full Ad</a>
             </div>
         </div>
     }

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </header>
 
-<form asp-controller="Account" asp-action="RegisterAgency" style="max-width:500px;margin:1%">
+<form asp-controller="Account" asp-action="RegisterAgency" style="float:right; width:550px">
     <div class="input-container">
         <i class="fa fa-user icon"></i>
         <input class="input-field" asp-for="Username" placeholder="Username">
@@ -57,10 +57,13 @@
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
 
-    <button class="btn btn-secondary btn-lg btn-block" role="button" aria-pressed="true">Register as Company</button>
+    <div class="container">
+        <button class="btn btn-secondary btn-lg btn-block" role="button" aria-pressed="true">Register as Agency</button>
+    </div>
 </form>
+
 
 @section Scripts
 {
-    <partial name="_ValidationScriptsPartial"/>
+    <partial name="_ValidationScriptsPartial" />
 }
