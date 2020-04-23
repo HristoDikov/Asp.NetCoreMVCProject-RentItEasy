@@ -11,6 +11,7 @@ namespace RentItEasy
     using Services.Contracts;
     using Services;
     using global::RentItEasy.Data;
+    using Microsoft.AspNetCore.Mvc;
 
     public class Startup
     {
@@ -41,10 +42,12 @@ namespace RentItEasy
                .AddDefaultTokenProviders()
                .AddEntityFrameworkStores<Data.ApplicationDbContext>();
 
-            //services.AddDefaultIdentity<Account>(options => options.SignIn.RequireConfirmedAccount = false)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddMvc(options =>
+                     options
+                     .Filters
+                     .Add(new AutoValidateAntiforgeryTokenAttribute()));
 
-            services.AddControllersWithViews(); 
+            services.AddControllersWithViews();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddScoped<IAdService, AdService>();
@@ -61,7 +64,7 @@ namespace RentItEasy
 
             Cloudinary cloudinary = new Cloudinary(account);
 
-            services.AddSingleton(cloudinary);   
+            services.AddSingleton(cloudinary);
         }
 
 
