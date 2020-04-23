@@ -14,14 +14,15 @@
     {
         @foreach (var appointment in Model)
         {
-            <div class="form-control-range">
-                <text>Which property: @appointment.Title</text>
+            <div class="form-control-range adView">
+                <br />
+                <h5 style="text-align:center">For Property: @appointment.Title</h5>
                 <hr />
-                <text>Viewer Name: @appointment.UserFirstName @appointment.UserLastName</text>
+                <h5 style="text-align:center">Viewer Name: @appointment.UserFirstName @appointment.UserLastName</h5>
                 <hr />
-                <text>Viewer Phone: @appointment.PhoneNumber</text>
+                <h5 style="text-align:center">Viewer Phone: @appointment.PhoneNumber</h5>
                 <hr />
-                <a asp-area="Agency" asp-controller="Appointment" asp-action="Arranged" asp-route-id="@appointment.Id" class="btn btn-primary" style="right:auto">Arranged</a>
+                <a asp-area="Agency" asp-controller="Appointment" asp-action="Arranged" asp-route-id="@appointment.Id" class="btn btn-primary">Arranged</a>
             </div>
         }
     }

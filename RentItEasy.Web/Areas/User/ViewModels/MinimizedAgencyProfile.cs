@@ -8,8 +8,8 @@
 
         public string MinimizedDescription
         {
-            get => Description.Length > 20
-                   ? Description.Substring(0, 15) + "..."
+            get => Description.Length > 31
+                   ? Description.Substring(0, 30) + "..."
                    : Description;
         }
 

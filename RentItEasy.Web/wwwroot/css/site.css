@@ -7,9 +7,67 @@ a.navbar-brand {
     word-break: break-all;
 }
 
+.serv ul {
+    display: inline;
+    flex-wrap: wrap;
+    margin: 10px;
+    padding: 5px;
+    text-align: left;
+}
+
+    .serv ul li {
+        list-style: none;
+        display: inline-block;
+        padding: 5px;
+        width: 29%;
+    }
+
+        .serv ul li span {
+            padding: 5px;
+        }
+
+.adView {
+    background-color: azure;
+    margin-right: 20px;
+    border-radius: 5px 6px;
+    margin-bottom: 20px;
+}
+
+
+.imgView {
+    height: 180px;
+    width: 292px;
+    border-radius: 5px 6px;
+}
+
+.imagesView {
+    height: 180px;
+    width: 287px;
+    border-radius: 5px 6px;
+    object-fit: fill;
+}
+
 /* Provide sufficient contrast against white background */
 a {
     color: #0366d6;
+    width: auto;
+}
+
+body {
+    background-image: url(../img/bg.png);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.navbar {
+    background-color: azure;
+}
+
+.p {
+    overflow-wrap: break-word;
 }
 
 .btn-primary {
@@ -67,13 +125,19 @@ body {
     margin-bottom: 60px;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
+content {
+    display: inline-block;
 }
+
+.footer {
+    height: 40px;
+    width: auto;
+    background-color: azure;
+    position: fixed;
+    display: inline-block;
+    padding-top: 20px;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -112,10 +176,10 @@ body {
     padding: 15px 20px;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 98%;
     opacity: 0.9;
-    margin:10px;
-    position:center
+    margin: 10px;
+    position: center
 }
 
     .btn:hover {

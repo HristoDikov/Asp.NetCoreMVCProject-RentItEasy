@@ -8,60 +8,61 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </header>
 
-<form asp-controller="Account" asp-action="RegisterAgency" style="float:right; width:550px">
-    <div class="input-container">
-        <i class="fa fa-user icon"></i>
-        <input class="input-field" asp-for="Username" placeholder="Username">
-        <span asp-validation-for="Username" class="text-danger"></span>
-    </div>
+<div style="float: right">
+    <form asp-controller="Account" asp-action="RegisterAgency" style="max-width:500px; min-width:500px">
+        <div class="input-container">
+            <i class="fa fa-user icon"></i>
+            <input class="input-field" asp-for="Username" placeholder="Username">
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
 
-    <div class="input-container">
-        <i class="fa fa-user icon"></i>
-        <input class="input-field" asp-for="Name" placeholder="Name">
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+        <div class="input-container">
+            <i class="fa fa-male icon"></i>
+            <input class="input-field" asp-for="Name" placeholder="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
 
-    <div class="input-container">
-        <i class="fa fa-user icon"></i>
-        <input class="input-field" asp-for="Description" placeholder="Description">
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
+        <div class="input-container">
+            <i class="fa fa-info icon"></i>
+            <input class="input-field" asp-for="Description" placeholder="Description">
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
 
-    <div class="input-container">
-        <i class="fa fa-phone icon"></i>
-        <input class="input-field" asp-for="PhoneNumber" placeholder="Phone number">
-        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-    </div>
+        <div class="input-container">
+            <i class="fa fa-phone icon"></i>
+            <input class="input-field" asp-for="PhoneNumber" placeholder="Phone number">
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
 
-    <div class="input-container">
-        <i class="fa fa-envelope icon"></i>
-        <input class="form-control" asp-for="Email" placeholder="Email" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
+        <div class="input-container">
+            <i class="fa fa-envelope icon"></i>
+            <input class="form-control" asp-for="Email" placeholder="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
 
-    <div class="input-container">
-        <i class="fa fa-address icon"></i>
-        <input class="form-control" asp-for="Address" placeholder="Address" />
-        <span asp-validation-for="Address" class="text-danger"></span>
-    </div>
+        <div class="input-container">
+            <i class="fa fa-address-card icon"></i>
+            <input class="form-control" asp-for="Address" placeholder="Address" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
 
-    <div class="input-container">
-        <i class="fa fa-key icon"></i>
-        <input class="input-field" asp-for="Password" placeholder="Password">
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
+        <div class="input-container">
+            <i class="fa fa-key icon"></i>
+            <input class="input-field" asp-for="Password" placeholder="Password">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
 
-    <div class="input-container">
-        <i class="fa fa-key icon"></i>
-        <input class="input-field" asp-for="ConfirmPassword" placeholder="Confirm password">
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-    </div>
+        <div class="input-container">
+            <i class="fa fa-key icon"></i>
+            <input class="input-field" asp-for="ConfirmPassword" placeholder="Confirm password">
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
 
-    <div class="container">
-        <button class="btn btn-secondary btn-lg btn-block" role="button" aria-pressed="true">Register as Agency</button>
-    </div>
-</form>
-
+        <div class="container">
+            <button class="btn btn-secondary btn-lg btn-block" role="button" aria-pressed="true">Register as Agency</button>
+        </div>
+    </form>
+</div>
 
 @section Scripts
 {

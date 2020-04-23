@@ -6,15 +6,15 @@
 
 <h1 class="text-center">@this.ViewData["Title"]</h1>
 
-<div class="row">
+<div class="row" style="padding:30px">
     @foreach (var ad in Model)
     {
-        <div class="col-md-4" style="width: 18rem;">
-            <img src=@ad.Path class="mr-10" alt="Card image cap" height="180" width="287">
+        <div class="col-md-6; adView">
+            <img src=@ad.Path class="imgView" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@ad.Title</h5>
                 <p class="card-text">@ad.MinimizedDescription</p>
-                <a style="width:auto" asp-area="Agency" asp-controller="Ad" asp-action="ViewAd" asp-route-id="@ad.Id" class="btn btn-primary">View Full Ad</a>
+                <a asp-area="Agency" asp-controller="Ad" asp-action="ViewAd" asp-route-id="@ad.Id" class="btn btn-primary">View Full Ad</a>
             </div>
         </div>
     }

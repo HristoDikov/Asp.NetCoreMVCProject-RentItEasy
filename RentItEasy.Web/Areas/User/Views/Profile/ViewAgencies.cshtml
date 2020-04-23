@@ -1,18 +1,19 @@
 ﻿@{
     ViewData["Title"] = "View Agencies";
 }
+<body>
 
-<div class="row">
-    @foreach (var agency in Model)
-    {
-    <div class="col-4">
-        <div class="card-body">
-            <h5 class="card-title">@agency.Name</h5>
-            <p class="card-text">@agency.MinimizedDescription</p>
-            <text class="text-right">Rating: @agency.Rating</text>
-            <a style="width:auto" asp-area="User" asp-controller="Profile" asp-action="Details" asp-route-id="@agency.Id" class="btn btn-primary">Details</a>
-        </div>
+    <div class="row">
+        @foreach (var agency in Model)
+        {
+            <div class="col-md-3; adView" style="width: 350px">
+                <div class="card-body">
+                    <h5 class="card-title">@agency.Name</h5>
+                    <p class="card-text">@agency.MinimizedDescription</p>
+                    <text class="text-right">Rating: @agency.Rating</text>
+                    <a style="width:auto" asp-area="User" asp-controller="Profile" asp-action="Details" asp-route-id="@agency.Id" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        }
     </div>
-    }
-</div>
-
+</body>

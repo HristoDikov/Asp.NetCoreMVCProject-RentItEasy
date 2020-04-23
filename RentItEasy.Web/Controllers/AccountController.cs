@@ -15,19 +15,19 @@
             this.accountService = accountService;
         }
 
-        public IActionResult Index() 
+        public IActionResult Index()
         {
             return this.View();
         }
 
         [HttpGet]
-        public IActionResult RegisterUser() 
+        public IActionResult RegisterUser()
         {
             return this.View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterUser(RegisterAsUserInputModel model) 
+        public async Task<IActionResult> RegisterUser(RegisterAsUserInputModel model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -39,7 +39,7 @@
                 return View(model);
             }
 
-            await this.accountService.CreateUser(model.Username, model.FirstName, model.LastName, 
+            await this.accountService.CreateUser(model.Username, model.FirstName, model.LastName,
                 model.Email, model.PhoneNumber, model.Password);
 
             return this.Redirect(GlobalConstants.loginUrl);
@@ -53,7 +53,7 @@
 
         [HttpPost]
 
-        public async Task<IActionResult> RegisterAgency(RegisterAsAgencyInputModel model) 
+        public async Task<IActionResult> RegisterAgency(RegisterAsAgencyInputModel model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -67,12 +67,12 @@
         }
 
         [HttpGet]
-        public IActionResult Login() 
+        public IActionResult Login()
         {
             return this.View();
         }
 
-        public IActionResult Login(LoginInputModel model) 
+        public IActionResult Login(LoginInputModel model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -81,10 +81,16 @@
 
             var url = this.accountService.Login(model.Username, model.Password, model.RememberMe).Result;
 
-            return this.Redirect(GlobalConstants.homeUrl);
+            if (url == GlobalConstants.loginUrl)
+            {
+                ModelState.AddModelError("Error", "Username or password is incorrect!");
+                return this.View(model);
+            }
+
+            return this.Redirect(url);
         }
 
-        public IActionResult Logout() 
+        public IActionResult Logout()
         {
             this.accountService.Logout();
 

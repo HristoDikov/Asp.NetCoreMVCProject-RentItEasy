@@ -1,7 +1,9 @@
 ﻿namespace RentItEasy.Areas.User.Controllers
 {
+    using global::RentItEasy.Areas.Agency.ViewModels;
     using global::RentItEasy.Areas.User.ViewModels;
     using global::RentItEasy.Common;
+    using global::RentItEasy.Services;
     using global::RentItEasy.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -13,10 +15,12 @@
     public class ProfileController : Controller
     {
         private readonly IProfileService profileService;
+        private readonly IAdService adService;
 
-        public ProfileController(IProfileService profileService)
+        public ProfileController(IProfileService profileService, IAdService adService)
         {
             this.profileService = profileService;
+            this.adService = adService;
         }
 
         public IActionResult ViewAgencies()

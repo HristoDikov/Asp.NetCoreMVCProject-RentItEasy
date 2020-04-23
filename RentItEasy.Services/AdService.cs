@@ -79,7 +79,17 @@
             var ads = this.db.Ads
                 .Include(a => a.ImagesPaths)
                 .Select(a => a)
-                .Take(10)
+                .Take(6)
+                .ToList();
+
+            return ads;
+        }
+
+        public IEnumerable<Ad> GetAllAds()
+        {
+            var ads = this.db.Ads
+                .Include(a => a.ImagesPaths)
+                .Select(a => a)
                 .ToList();
 
             return ads;

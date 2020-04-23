@@ -13,8 +13,8 @@
     }
     @foreach (var ad in Model)
     {
-        <div class="col-4" style="width: 18rem;">
-            <img src=@ad.Path class="mr-10" alt="Card image cap" height="180" width="287">
+        <div class="col-md-4; adView">
+            <img src=@ad.Path class="imgView" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@ad.Title</h5>
                 <p class="card-text">@ad.MinimizedDescription</p>

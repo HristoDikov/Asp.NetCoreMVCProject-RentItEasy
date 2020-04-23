@@ -4,56 +4,58 @@
     ViewData["Title"] = "Create";
 }
 
-<form enctype="multipart/form-data" asp-controller="Ad" asp-action="Create" asp-area="Agency">
-    <div class="form-group">
-        <label asp-for="Title"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
+    <div class="adView" style="padding: 30px;">
+        <form enctype="multipart/form-data" asp-controller="Ad" asp-action="Create" asp-area="Agency">
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="PropertyType"></label>
-        <select asp-for="PropertyType" class="form-control" asp-items="@Html.GetEnumSelectList<PropertyType>()"></select>
-        <span asp-validation-for="PropertyType" class="text-danger"></span>
-    </div>
+            <div class="form-group">
+                <label asp-for="PropertyType"></label>
+                <select asp-for="PropertyType" class="form-control" asp-items="@Html.GetEnumSelectList<PropertyType>()"></select>
+                <span asp-validation-for="PropertyType" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Location"></label>
-        <input asp-for="Location" class="form-control" />
-        <span asp-validation-for="Location" class="text-danger"></span>
-    </div>
+            <div class="form-group">
+                <label asp-for="Location"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="RentPrice"></label>
-        <input asp-for="RentPrice" class="form-control" />
-        <span asp-validation-for="RentPrice" class="text-danger"></span>
-    </div>
+            <div class="form-group">
+                <label asp-for="RentPrice"></label>
+                <input asp-for="RentPrice" class="form-control" />
+                <span asp-validation-for="RentPrice" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Size"></label>
-        <input asp-for="Size" class="form-control" />
-        <span asp-validation-for="Size" class="text-danger"></span>
-    </div>
+            <div class="form-group">
+                <label asp-for="Size"></label>
+                <input asp-for="Size" class="form-control" />
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="BuildingClass"></label>
-        <select asp-for="BuildingClass" class="form-control" asp-items="@Html.GetEnumSelectList<BuildingClass>()"></select>
-        <span asp-validation-for="BuildingClass" class="text-danger"></span>
-    </div>
+            <div class="form-group">
+                <label asp-for="BuildingClass"></label>
+                <select asp-for="BuildingClass" class="form-control" asp-items="@Html.GetEnumSelectList<BuildingClass>()"></select>
+                <span asp-validation-for="BuildingClass" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Images">Select Images</label>
-        <input type="file" asp-for="Images" multiple />
-    </div>
+            <div class="form-group">
+                <label asp-for="Images">Select Images</label>
+                <input type="file" asp-for="Images" multiple />
+            </div>
 
-    <div class="form-group">
-        <button style="width:auto"  class="btn btn-secondary btn-lg btn-block" role="button" aria-pressed="true">Create Ad</button>
-    </div>
+            <div class="form-group">
+                <button style="width:auto" class="btn btn-secondary btn-lg btn-block" role="button" aria-pressed="true">Create Ad</button>
+            </div>
 
-</form>
+        </form>
+    </div>

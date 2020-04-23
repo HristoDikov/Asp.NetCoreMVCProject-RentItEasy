@@ -12,48 +12,70 @@
     </style>
 </head>
 
-<form>
-    <div>
-        <h3 class="text-center">@Model.Name</h3>
-        <hr />
-        <text>Description: @Model.Description</text>
-        <hr />
-        <text>Address: @Model.Address</text>
-        <hr />
-        <text>Phone number: @Model.PhoneNumber</text>
-        <hr />
-    </div>
-</form>
-<div class="col">
-    @for (int i = 0; i < 5; i++)
-    {
-        if (i < Model.Rating.AverageRating)
+<div class="col-md-4; adView" style="padding: 30px">
+    <form>
+        <div>
+            <h3 class="text-center">@Model.Name</h3>
+            <hr />
+            <h4>
+                Description
+            </h4>
+            <hr />
+
+            <p style="overflow-wrap:break-word;">
+                @Model.Description
+            </p>
+
+            <hr />
+            <h4>
+                Address:
+            </h4>
+            <hr />
+            @Model.Address
+            <hr />
+            <h4>
+                Phone number
+            </h4>
+            <hr />
+            @Model.PhoneNumber
+            <hr />
+        </div>
+    </form>
+
+    <h4>Rating</h4>
+    <hr />
+
+    <div class="col">
+        @for (int i = 0; i < 5; i++)
         {
-            <span class="fa fa-star checked"></span>
+            if (i < Model.Rating.AverageRating)
+            {
+                <span class="fa fa-star checked"></span>
+            }
+            else
+            {
+                <span class="fa fa-star"></span>
+            }
+
+        }
+
+        <p>Rating: @Model.Rating.AverageRating.ToString("F1") average based on @Model.Rating.CountOfVotes reviews.</p>
+
+        @if (Model.Rating.VotedUsers.Where(a => a.UserProfile.Username == this.User.Identity.Name).FirstOrDefault() != null)
+        {
+            <p style="color:red">*You already Voted</p>
         }
         else
         {
-            <span class="fa fa-star"></span>
+            <form asp-area="User" asp-controller="Profile" asp-action="Details" asp-route-Id="@Model.Id" method="post">
+                <input style="width:auto" type="number" min="0" max="5" step="1" asp-for="@Model.RateDigit" class="form-control mytext" />
+                <span asp-validation-for="@Model.RateDigit" class="text-danger"></span>
+                <input name="agencyId" hidden value="@Model.Id" />
+                <div class="form-group">
+                    <input style="width:auto" type="submit" value="Rate" class="btn btn-default" />
+                </div>
+            </form>
         }
 
-    }
-
-    <p>Rating: @Model.Rating.AverageRating.ToString("F1") average based on @Model.Rating.CountOfVotes reviews.</p>
-
-    @if (Model.Rating.VotedUsers.Where(a => a.UserProfile.Username == this.User.Identity.Name).FirstOrDefault() != null)
-    {
-        <p style="color:red">*You already Voted</p>
-    }
-    else
-    {
-        <form asp-area="User" asp-controller="Profile" asp-action="Details" asp-route-Id="@Model.Id" method="post">
-            <input style="width:auto" type="number" min="0" max="5" step="1" asp-for="@Model.RateDigit" class="form-control mytext" />
-            <span asp-validation-for="@Model.RateDigit" class="text-danger"></span>
-            <input name="agencyId" hidden value="@Model.Id" />
-            <div class="form-group">
-                <input style="width:auto" type="submit" value="Rate" class="btn btn-default" />
-            </div>
-        </form>
-    }
-
+    </div>
 </div>

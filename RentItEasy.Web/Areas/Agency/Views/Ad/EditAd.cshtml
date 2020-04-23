@@ -1,10 +1,10 @@
 ﻿@using RentItEasy.Models.Enums
-@model RentItEasy.Areas.User.ViewModels.FullAdViewModel
+@model RentItEasy.Areas.Agency.ViewModels.FullAdViewModel
 @{
     ViewData["Title"] = "Edit Ad";
 }
 
-<div class="border container" style="padding:30px;">
+<div class="adView" style="padding:30px;">
     <form enctype="multipart/form-data" asp-controller="Ad" asp-action="EditAd">
         <input type="hidden" asp-for="@Model.Id" />
         <div class="form-group">
