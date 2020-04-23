@@ -8,6 +8,8 @@
     {
         IEnumerable<Ad> GetTenAds();
 
+        IEnumerable<Ad> GetAllAds();
+
         Task CreateAd(string userName, string title, string description, IEnumerable<string> imagesPath,
             string propertyType, string size, string location, string rentPrice, string buildingClass);
 

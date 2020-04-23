@@ -72,7 +72,7 @@
 
         [HttpGet]
         [Authorize]
-       public IActionResult ViewAd(int id)
+        public IActionResult ViewAd(int id)
         {
             var ad = this.adService.GetAd(id);
 
@@ -147,7 +147,6 @@
         public async Task<IActionResult> DeleteAd(int id)
         {
             await adService.DeleteAd(id);
-
 
             return this.Redirect(GlobalConstants.homeUrl);
         }

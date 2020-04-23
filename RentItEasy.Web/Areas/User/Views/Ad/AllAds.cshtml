@@ -1,0 +1,23 @@
+﻿@model IEnumerable<RentItEasy.Areas.Agency.ViewModels.AdViewModel>
+@{
+    ViewData["Title"] = "All Ads";
+}
+
+<div class="flex-sm-wrap serv">
+    <ul>
+        @foreach (var ad in Model)
+        {
+            <li>
+                <div class="adView">
+                    <img src=@ad.Path class="imgView" alt="Card image cap" width="150">
+                    <div class="card-body">
+                        <h5 class="card-title">@ad.Title</h5>
+                        <p class="card-text">@ad.MinimizedDescription</p>
+                        <a asp-area="Agency" asp-controller="Ad" asp-action="ViewAd" asp-route-id="@ad.Id" class="btn btn-primary">Full Ad</a>
+                    </div>
+                </div>
+            </li>
+        }
+
+    </ul>
+</div>
