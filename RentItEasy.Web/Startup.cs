@@ -44,7 +44,8 @@ namespace RentItEasy
             //services.AddDefaultIdentity<Account>(options => options.SignIn.RequireConfirmedAccount = false)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(); 
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddScoped<IAdService, AdService>();
             services.AddScoped<IAccountService, AccountService>();
