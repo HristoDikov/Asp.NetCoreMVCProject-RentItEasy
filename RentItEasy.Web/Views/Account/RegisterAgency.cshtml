@@ -9,7 +9,7 @@
 </header>
 
 <div style="float: right">
-    <form asp-controller="Account" asp-action="RegisterAgency" style="max-width:500px; min-width:500px">
+    <form asp-controller="Account" asp-action="RegisterAgency" style="max-width:500px; padding-left:25px">
         <div class="input-container">
             <i class="fa fa-user icon"></i>
             <input class="input-field" asp-for="Username" placeholder="Username">
@@ -24,7 +24,7 @@
 
         <div class="input-container">
             <i class="fa fa-info icon"></i>
-            <input class="input-field" asp-for="Description" placeholder="Description">
+            <textarea class="input-field" asp-for="Description" placeholder="Description"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
