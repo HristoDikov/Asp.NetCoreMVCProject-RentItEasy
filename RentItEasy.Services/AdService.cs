@@ -52,11 +52,12 @@
 
             for (int i = 0; i < imagesPaths.Count(); i++)
             {
-                var imagePath = new ImagePath();
-
-                imagePath.Path = imagesPathsAsList[i];
-                imagePath.Id = ad.Id;
-                imagePath.Ad = ad;
+                var imagePath = new ImagePath
+                {
+                    Path = imagesPathsAsList[i],
+                    Id = ad.Id,
+                    Ad = ad
+                };
 
                 createdImagesPaths.Add(imagePath);
             }

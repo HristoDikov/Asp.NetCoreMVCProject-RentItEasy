@@ -69,6 +69,7 @@ namespace RentItEasy.Services
 
             return up;
         }
+
         public UserProfile GetUserByUsername(string username)
         {
             var user = this.db.UsersProfiles

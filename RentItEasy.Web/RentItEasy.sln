@@ -19,7 +19,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentItEasy.Models", "..\Ren
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{638DBA79-A745-4EB8-944F-DD734130E6F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalConstants", "..\GlobalConstants\GlobalConstants.csproj", "{9CF5B110-A04D-43F2-BF54-D08D8A9709D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalConstants", "..\GlobalConstants\GlobalConstants.csproj", "{9CF5B110-A04D-43F2-BF54-D08D8A9709D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentiItEasy.Services.Tests", "..\RentiItEasy.Services.Tests\RentiItEasy.Services.Tests.csproj", "{70124E2A-6453-4DE6-976A-74719412BCB4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1A286854-A4D1-45C1-BD77-1F0F5C838452} = {1A286854-A4D1-45C1-BD77-1F0F5C838452}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +52,10 @@ Global
 		{9CF5B110-A04D-43F2-BF54-D08D8A9709D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CF5B110-A04D-43F2-BF54-D08D8A9709D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CF5B110-A04D-43F2-BF54-D08D8A9709D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70124E2A-6453-4DE6-976A-74719412BCB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70124E2A-6453-4DE6-976A-74719412BCB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70124E2A-6453-4DE6-976A-74719412BCB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70124E2A-6453-4DE6-976A-74719412BCB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,6 +7,6 @@
 
     public interface IUploadImageService
     {
-        public Task<IEnumerable<string>> UploadImage(Cloudinary cloudinary, IEnumerable<IFormFile> files);
+        Task<IEnumerable<string>> UploadImage(Cloudinary cloudinary, IEnumerable<IFormFile> files);
     }
 }

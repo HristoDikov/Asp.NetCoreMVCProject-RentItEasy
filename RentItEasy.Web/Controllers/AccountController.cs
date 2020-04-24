@@ -4,6 +4,7 @@
     using global::RentItEasy.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
     using RentItEasy.Web.ViewModels.Account;
+    using System;
     using System.Threading.Tasks;
 
     public class AccountController : Controller

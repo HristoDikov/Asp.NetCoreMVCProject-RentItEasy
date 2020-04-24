@@ -58,9 +58,10 @@ namespace RentItEasy
             services.AddRazorPages();
 
             CloudinaryDotNet.Account account = new CloudinaryDotNet.Account(
-                            this.Configuration["Cloudinary:AppName"],
-                            this.Configuration["Cloudinary:AppKey"],
-                            this.Configuration["Cloudinary:AppSecret"]);
+                           this.Configuration["Cloudinary:AppName"],
+                           this.Configuration["Cloudinary:AppKey"],
+                           this.Configuration["Cloudinary:AppSecret"]);
+
 
             Cloudinary cloudinary = new Cloudinary(account);
 
