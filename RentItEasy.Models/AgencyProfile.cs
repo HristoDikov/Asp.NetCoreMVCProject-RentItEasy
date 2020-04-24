@@ -34,7 +34,7 @@
 
         public virtual Account Account { get; set; }
 
-        public virtual IEnumerable<Ad> Ads { get; set; }
+        public virtual HashSet<Ad> Ads { get; set; }
 
         public virtual HashSet<Appointment> Appointments { get; set; }
     }

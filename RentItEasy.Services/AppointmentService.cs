@@ -48,6 +48,7 @@
 
             return agencyApp;
         }
+
         public async Task DeleteAppointment(int id)
         {
             var app = this.db.Appointments

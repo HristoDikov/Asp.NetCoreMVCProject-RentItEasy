@@ -116,6 +116,7 @@ namespace RentiItEasy.Services.Tests
             Assert.Equal(4, profile.Rating.RatingSum);
             Assert.Equal(1, countOfUsersRatings);
         }
+
         [Fact]
         public void GetUserRatingTest()
         {
