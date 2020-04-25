@@ -1,20 +1,13 @@
-﻿namespace RentItEasy.Areas.Agency.ViewModels
+﻿using System.Collections.Generic;
+
+namespace RentItEasy.Areas.Agency.ViewModels
 {
     public class AdViewModel
     {
-        public int Id { get; set; }
+        public int PagesCount { get; set; }
 
-        public string Title { get; set; }
+        public int CurrentPage { get; set; }
 
-        public string Description { get; set; }
-
-        public string MinimizedDescription
-        {
-            get => Description.Length > 20
-                   ? Description.Substring(0, 19) + "..."
-                   : Description;
-        }
-
-        public string Path { get; set; }
+        public IEnumerable<MinimizedAdViewModel> MinimizedAds { get; set; }
     }
 }

@@ -52,20 +52,37 @@
                 model.Size, model.Location, model.RentPrice, model.BuildingClass);
 
             var ads = this.adService.GetAgencyAds(userName);
-            var minimizedAds = AdToMinimizedAdViewModel(ads);
+            var minimizedAds = AdToAdViewModel(ads);
 
             return this.View("MyAds", minimizedAds);
         }
 
         [HttpGet]
         [Authorize(Roles = GlobalConstants.agencyRoleName)]
-        public IActionResult MyAds()
+        public IActionResult MyAds(int page = 1)
         {
             var currentUserProfile = this.User.Identity.Name;
 
             var ads = this.adService.GetAgencyAds(currentUserProfile);
 
-            var model = AdToMinimizedAdViewModel(ads);
+            int skip = (page - 1) * GlobalConstants.ItemsPerPage;
+            var adsFromService = adService.GetAgencyAds(currentUserProfile, GlobalConstants.ItemsPerPage, skip);
+
+            int count = this.adService.GetAdsByAgencyCount(currentUserProfile);
+
+            var model = new AdViewModel
+            {
+                PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ItemsPerPage),
+                CurrentPage = page,
+                MinimizedAds = ads.Select(a => new MinimizedAdViewModel
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    Path = GlobalConstants.cloudinary + a.ImagesPaths.First().Path
+                })
+               .ToList()
+            };
 
             return View(model);
         }
@@ -137,7 +154,7 @@
 
             var currentUserProfile = this.User.Identity.Name;
             var ads = this.adService.GetAgencyAds(currentUserProfile);
-            var minimizedAds = AdToMinimizedAdViewModel(ads);
+            var minimizedAds = AdToAdViewModel(ads);
 
             return this.View("MyAds", minimizedAds);
         }
@@ -161,24 +178,20 @@
             return ads;
         }
 
-        private IEnumerable<AdViewModel> AdToMinimizedAdViewModel(IEnumerable<Ad> ads)
+        private AdViewModel AdToAdViewModel(IEnumerable<Ad> ads)
         {
-            var minimizedAds = new List<AdViewModel>();
-
-            foreach (var ad in ads)
+            var AdViewModel = new AdViewModel
             {
-                var minimizedAd = new AdViewModel
+                MinimizedAds = ads.Select(a => new MinimizedAdViewModel
                 {
-                    Id = ad.Id,
-                    Title = ad.Title,
-                    Description = ad.Description,
-                    Path = GlobalConstants.cloudinary + ad.ImagesPaths.First().Path
-                };
-
-                minimizedAds.Add(minimizedAd);
-            }
-
-            return minimizedAds;
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    Path = GlobalConstants.cloudinary + a.ImagesPaths.First().Path
+                })
+                .ToList()
+            };
+            return AdViewModel;
         }
 
     }

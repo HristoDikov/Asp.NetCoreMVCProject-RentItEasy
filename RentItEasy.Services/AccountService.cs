@@ -73,6 +73,7 @@
                 if (createRole.Succeeded)
                 {
                     var result = await userManager.AddToRoleAsync(user, roleName);
+                    return;
                 }
             }
 

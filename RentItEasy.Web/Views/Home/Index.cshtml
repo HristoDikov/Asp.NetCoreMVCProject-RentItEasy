@@ -1,5 +1,5 @@
 ﻿@using RentItEasy.Common
-@model List<RentItEasy.Areas.Agency.ViewModels.AdViewModel>
+@model RentItEasy.Areas.Agency.ViewModels.AdViewModel
 @{
     this.ViewData["Title"] = $"Welcome to {GlobalConstants.SystemName}";
 }
@@ -7,7 +7,7 @@
 <h1 class="text-center">@this.ViewData["Title"]</h1>
 
 <div class="row" style="padding:30px">
-    @foreach (var ad in Model)
+    @foreach (var ad in Model.MinimizedAds)
     {
         <div class="col-md-6; adView">
             <img src=@ad.Path class="imgView" alt="Card image cap">

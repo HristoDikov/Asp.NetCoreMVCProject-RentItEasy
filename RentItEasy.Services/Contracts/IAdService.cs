@@ -8,12 +8,17 @@
     {
         IEnumerable<Ad> GetTenAds();
 
-        IEnumerable<Ad> GetAllAds();
+        IEnumerable<Ad> GetAllAds(int page, int? take = null, int skip = 0);
+
+        int GetAdsCount();
+
+        int GetAdsByAgencyCount(string username);
+
 
         Task CreateAd(string userName, string title, string description, IEnumerable<string> imagesPath,
             string propertyType, string size, string location, string rentPrice, string buildingClass);
 
-        IEnumerable<Ad> GetAgencyAds(string name);
+        IEnumerable<Ad> GetAgencyAds(string name, int? take = null, int skip = 0);
 
         Ad GetAd(int id);
 

@@ -86,22 +86,37 @@
             return ads;
         }
 
-        public IEnumerable<Ad> GetAllAds()
+        public IEnumerable<Ad> GetAllAds(int page, int? take = null, int skip = 0)
         {
             var ads = this.db.Ads
                 .Include(a => a.ImagesPaths)
+                .OrderByDescending(x => x.CreatedOn)
                 .Select(a => a)
+                .Skip(skip)
                 .ToList();
+
+            if (take.HasValue)
+            {
+                ads = ads.Take(take.Value).ToList();
+            }
 
             return ads;
         }
 
-        public IEnumerable<Ad> GetAgencyAds(string name)
+        public IEnumerable<Ad> GetAgencyAds(string name, int? take = null, int skip = 0)
         {
             var ads = this.db.Ads
                 .Where(a => a.AgencyProfile.Username == name)
+                .OrderByDescending(a => a.CreatedOn)
                 .Include(a => a.ImagesPaths)
+                .Skip(skip)
                 .ToList();
+
+
+            if (take.HasValue)
+            {
+                ads = ads.Take(take.Value).ToList();
+            }
 
             return ads;
         }
@@ -135,6 +150,19 @@
             this.db.Ads.Remove(ad);
 
             await this.db.SaveChangesAsync();
+        }
+
+        public int GetAdsCount()
+        {
+           return this.db.Ads.Count();
+        }
+
+        public int GetAdsByAgencyCount(string username)
+        {
+            return this.db.Ads
+                .Include(a => a.AgencyProfile)
+                .Where(a => a.AgencyProfile.Username == username)
+                .Count();
         }
     }
 }

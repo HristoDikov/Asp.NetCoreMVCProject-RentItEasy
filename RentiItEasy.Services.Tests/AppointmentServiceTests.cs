@@ -5,7 +5,6 @@
     using RentItEasy.Data;
     using System;
     using Xunit;
-    using RentItEasy.Services.Contracts;
     using RentItEasy.Services;
     using System.Collections.Generic;
     using System.Linq;

@@ -25,14 +25,17 @@
         {
             var adsFromService = adService.GetTenAds();
 
-            var viewModel = adsFromService.Select(a => new AdViewModel
+            var viewModel = new AdViewModel
             {
-                Title = a.Title,
-                Description = a.Description,
-                Path = GlobalConstants.cloudinary + a.ImagesPaths.First().Path,
-                Id = a.Id,
-            })
-                .ToList();
+                MinimizedAds = adsFromService.Select(a => new MinimizedAdViewModel
+                {
+                    Title = a.Title,
+                    Description = a.Description,
+                    Path = GlobalConstants.cloudinary + a.ImagesPaths.First().Path,
+                    Id = a.Id,
+                })
+                .ToList()
+            };
 
             return View(viewModel);
         }

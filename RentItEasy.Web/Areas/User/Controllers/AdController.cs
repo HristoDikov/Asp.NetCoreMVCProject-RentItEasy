@@ -25,18 +25,26 @@ namespace RentItEasy.Areas.User.Controllers
             this.uploadImageadService = uploadImageadService;
         }
 
-        public IActionResult AllAds()
+        public IActionResult AllAds(int page = 1)
         {
-            var adsFromService = adService.GetAllAds();
+            int skip = (page - 1) * GlobalConstants.ItemsPerPage;
+            var adsFromService = adService.GetAllAds(page, GlobalConstants.ItemsPerPage, skip);
 
-            var viewModel = adsFromService.Select(a => new AdViewModel
+            int count = this.adService.GetAdsCount();
+
+            var viewModel = new AdViewModel
             {
-                Title = a.Title,
-                Description = a.Description,
-                Path = GlobalConstants.cloudinary + a.ImagesPaths.First().Path,
-                Id = a.Id,
-            })
-                .ToList();
+                PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ItemsPerPage),
+                CurrentPage = page,
+                MinimizedAds = adsFromService.Select(a => new MinimizedAdViewModel
+                {
+                    Title = a.Title,
+                    Description = a.Description,
+                    Path = GlobalConstants.cloudinary + a.ImagesPaths.First().Path,
+                    Id = a.Id,
+                })
+                .ToList(),
+            };
 
             return View(viewModel);
         }
