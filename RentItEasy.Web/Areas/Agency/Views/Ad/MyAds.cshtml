@@ -1,4 +1,4 @@
-﻿@model RentItEasy.Areas.Agency.ViewModels.AdViewModel
+﻿@model RentItEasy.Areas.Agency.Ad.ViewModels.AdViewModel
 @using System.Linq;
 @{
     ViewData["Title"] = "My Ads";
@@ -47,7 +47,7 @@
             var active = i == this.Model.CurrentPage ? "active" : string.Empty;
             <li class="page-item @active">
                 <a class="page-link"
-                   asp-area="User"
+                   asp-area="Agency"
                    asp-controller="Ad"
                    asp-action="MyAds"
                    asp-route-page="@i">@i</a>

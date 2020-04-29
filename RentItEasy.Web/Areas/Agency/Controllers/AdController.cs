@@ -3,7 +3,6 @@
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Areas.Agency.ViewModels;
     using Common;
     using Data.Models;
     using Services;
@@ -12,6 +11,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using global::RentItEasy.Areas.Agency.Ad.ViewModels;
 
     [Area(GlobalConstants.agencyRoleName)]
     public class AdController : Controller
@@ -125,15 +125,15 @@
         {
             var ad = adService.GetAd(id);
 
-            var model = new FullAdViewModel
+            var model = new EditAdInputModel
             {
                 Id = ad.Id,
                 Title = ad.Title,
                 Description = ad.Description,
                 RentPrice = ad.RentPrice,
-                BuildingClass = ad.BuildingClass,
+                BuildingClass = ad.BuildingClass.ToString(),
                 Location = ad.Location,
-                PropertyType = ad.PropertyType,
+                PropertyType = ad.PropertyType.ToString(),
                 Size = ad.Size,
             };
 
@@ -142,7 +142,7 @@
 
         [HttpPost]
         [Authorize(Roles = GlobalConstants.agencyRoleName)]
-        public async Task<IActionResult> EditAd(CreateAdInputModel model)
+        public async Task<IActionResult> EditAd(EditAdInputModel model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -150,7 +150,7 @@
             }
 
             await adService.EditAd(model.Id, model.Title, model.Description, model.PropertyType, model.Size,
-                model.Location, model.RentPrice, model.BuildingClass);
+     model.Location, model.RentPrice, model.BuildingClass);
 
             var currentUserProfile = this.User.Identity.Name;
             var ads = this.adService.GetAgencyAds(currentUserProfile);
@@ -182,6 +182,8 @@
         {
             var AdViewModel = new AdViewModel
             {
+                CurrentPage = 1,
+                PagesCount = 1,
                 MinimizedAds = ads.Select(a => new MinimizedAdViewModel
                 {
                     Id = a.Id,

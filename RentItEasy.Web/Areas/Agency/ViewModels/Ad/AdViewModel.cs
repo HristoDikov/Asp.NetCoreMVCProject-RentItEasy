@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace RentItEasy.Areas.Agency.ViewModels
+﻿namespace RentItEasy.Areas.Agency.Ad.ViewModels
 {
+    using System.Collections.Generic;
+
     public class AdViewModel
     {
         public int PagesCount { get; set; }

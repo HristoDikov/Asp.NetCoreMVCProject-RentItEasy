@@ -1,8 +1,7 @@
-﻿namespace RentItEasy.Areas.Agency.ViewModels
+﻿namespace  RentItEasy.Areas.Agency.Ad.ViewModels
 {
-    using Data.Models;
-    using Models.Enums;
-    using System;
+    using global::RentItEasy.Data.Models;
+    using global::RentItEasy.Models.Enums;
     using System.Collections.Generic;
 
     public class FullAdViewModel

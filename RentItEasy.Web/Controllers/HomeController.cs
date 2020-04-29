@@ -2,8 +2,7 @@
 {
     using System.Diagnostics;
     using System.Linq;
-    using global::RentItEasy.Areas.Agency.ViewModels;
-    using global::RentItEasy.Areas.User.ViewModels;
+    using global::RentItEasy.Areas.Agency.Ad.ViewModels;
     using global::RentItEasy.Common;
     using global::RentItEasy.Models;
     using global::RentItEasy.Services;

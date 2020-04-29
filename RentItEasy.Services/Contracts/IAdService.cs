@@ -8,7 +8,7 @@
     {
         IEnumerable<Ad> GetTenAds();
 
-        IEnumerable<Ad> GetAllAds(int page, int? take = null, int skip = 0);
+        IEnumerable<Ad> GetAllAds(int? take = null, int skip = 0);
 
         int GetAdsCount();
 

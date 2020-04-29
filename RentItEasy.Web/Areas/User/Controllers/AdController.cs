@@ -1,17 +1,14 @@
-﻿using CloudinaryDotNet;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using RentItEasy.Areas.Agency.ViewModels;
-using RentItEasy.Common;
-using RentItEasy.Services;
-using RentItEasy.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace RentItEasy.Areas.User.Controllers
+﻿namespace RentItEasy.Areas.User.Controllers
 {
+    using global::RentItEasy.Areas.Agency.Ad.ViewModels;
+    using global::RentItEasy.Common;
+    using global::RentItEasy.Services;
+    using global::RentItEasy.Services.Contracts;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Linq;
+
     [Area(GlobalConstants.userRoleName)]
     [Authorize]
     public class AdController : Controller
@@ -28,7 +25,7 @@ namespace RentItEasy.Areas.User.Controllers
         public IActionResult AllAds(int page = 1)
         {
             int skip = (page - 1) * GlobalConstants.ItemsPerPage;
-            var adsFromService = adService.GetAllAds(page, GlobalConstants.ItemsPerPage, skip);
+            var adsFromService = adService.GetAllAds(GlobalConstants.ItemsPerPage, skip);
 
             int count = this.adService.GetAdsCount();
 

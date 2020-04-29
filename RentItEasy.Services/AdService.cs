@@ -86,7 +86,7 @@
             return ads;
         }
 
-        public IEnumerable<Ad> GetAllAds(int page, int? take = null, int skip = 0)
+        public IEnumerable<Ad> GetAllAds(int? take = null, int skip = 0)
         {
             var ads = this.db.Ads
                 .Include(a => a.ImagesPaths)

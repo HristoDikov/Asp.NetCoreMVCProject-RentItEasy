@@ -1,4 +1,4 @@
-﻿namespace RentItEasy.Areas.Agency.ViewModels
+﻿namespace RentItEasy.Areas.Agency.Ad.ViewModels
 {
     using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;
