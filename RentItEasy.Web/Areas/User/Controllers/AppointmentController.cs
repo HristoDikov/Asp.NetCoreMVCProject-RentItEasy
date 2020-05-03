@@ -1,14 +1,12 @@
 ﻿namespace RentItEasy.Areas.User.Controllers
 {
-    using global::RentItEasy.Areas.User.ViewModels;
+    using global::RentItEasy.Areas.User.ViewModels.Appointment;
     using global::RentItEasy.Common;
     using global::RentItEasy.Services;
     using global::RentItEasy.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
 
     [Area(GlobalConstants.userRoleName)]
     [Authorize(Roles = GlobalConstants.userRoleName)]

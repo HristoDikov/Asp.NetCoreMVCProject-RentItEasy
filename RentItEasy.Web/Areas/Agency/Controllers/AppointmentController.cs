@@ -1,8 +1,7 @@
 ﻿namespace RentItEasy.Areas.Agency.Controllers
 {
-    using global::RentItEasy.Areas.User.ViewModels;
+    using global::RentItEasy.Areas.User.ViewModels.Appointment;
     using global::RentItEasy.Common;
-    using global::RentItEasy.Services;
     using global::RentItEasy.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

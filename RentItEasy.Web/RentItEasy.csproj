@@ -34,10 +34,4 @@
     <ProjectReference Include="..\RentItEasy.Services\RentItEasy.Services.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Admin\Views\" />
-  </ItemGroup>
-
 </Project>

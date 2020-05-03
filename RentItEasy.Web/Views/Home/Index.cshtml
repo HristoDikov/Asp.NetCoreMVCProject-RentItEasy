@@ -6,10 +6,10 @@
 
 <h1 class="text-center">@this.ViewData["Title"]</h1>
 
-<div class="row" style="padding:30px">
+<div class="row" style="padding-left:90px;">
     @foreach (var ad in Model.MinimizedAds)
     {
-        <div class="col-md-6; adView">
+        <div class="col-md-3; adView">
             <img src=@ad.Path class="imgView" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@ad.Title</h5>

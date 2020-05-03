@@ -1,12 +1,11 @@
-﻿using RentItEasy.Data.Models;
-namespace RentItEasy.Services
+﻿namespace RentItEasy.Services
 {
+    using RentItEasy.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using RentItEasy.Data;
     using RentItEasy.Services.Contracts;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
     public class ProfileService : IProfileService
     {

@@ -26,7 +26,7 @@
         public IActionResult ViewAgencies()
         {
             var agencies = profileService.GetAgencies();
-            List<MinimizedAgencyProfile> minAgencies = new List<MinimizedAgencyProfile>();
+            var minAgencies = new List<MinimizedAgencyProfile>();
 
             foreach (var agency in agencies)
             {
