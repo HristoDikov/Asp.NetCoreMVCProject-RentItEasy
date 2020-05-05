@@ -7,7 +7,7 @@
     {
         public Rating()
         {
-            this.VotedUsers = new HashSet<UserRating>();
+            this.VotedUsers = new List<UserRating>();
         }
 
         public string Id { get; set; } = Guid.NewGuid().ToString();
@@ -18,6 +18,6 @@
 
         public decimal AverageRating { get; set; } = 0;
 
-        public HashSet<UserRating> VotedUsers { get; set; }
+        public List<UserRating> VotedUsers { get; set; }
     }
 }

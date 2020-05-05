@@ -68,20 +68,50 @@
         public Ad GetAd(int id)
         {
             var ad = this.db.Ads
-                .Include(a => a.ImagesPaths)
-                .Include(a => a.AgencyProfile)
+                .Select(a => new Ad
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    RentPrice = a.RentPrice,
+                    BuildingClass = a.BuildingClass,
+                    Location = a.Location,
+                    PropertyType = a.PropertyType,
+                    Size = a.Size,
+                    CreatedOn = a.CreatedOn,
+                    AgencyProfileId = a.AgencyProfile.Id,
+                    ImagesPaths = a.ImagesPaths.Select(ip => new ImagePath
+                    {
+                        Path = ip.Path,
+                    })
+                    .ToList(),
+                    AgencyProfile = new AgencyProfile
+                    {
+                        Username = a.AgencyProfile.Username,
+                    },
+                })
                 .FirstOrDefault(a => a.Id == id);
 
             return ad;
         }
 
-        public IEnumerable<Ad> GetTenAds()
+        public IEnumerable<Ad> GetSixAds()
         {
             var ads = this.db.Ads
-                .Include(a => a.ImagesPaths)
-                .Select(a => a)
-                .Take(6)
-                .ToList();
+                 .Select(a => new Ad
+                 {
+                     Title = a.Title,
+                     Description = a.Description,
+                     Id = a.Id,
+                     CreatedOn = a.CreatedOn,
+                     ImagesPaths = a.ImagesPaths.Select(ip => new ImagePath
+                     {
+                         Path = ip.Path,
+                     })
+                    .ToList(),
+                 })
+                .ToList()
+                .Take(6);
 
             return ads;
         }
@@ -89,11 +119,21 @@
         public IEnumerable<Ad> GetAllAds(int? take = null, int skip = 0)
         {
             var ads = this.db.Ads
-                .Include(a => a.ImagesPaths)
+                .Select(a => new Ad
+                {
+                    Title = a.Title,
+                    Description = a.Description,
+                    Id = a.Id,
+                    CreatedOn = a.CreatedOn,
+                    ImagesPaths = a.ImagesPaths.Select(ip => new ImagePath
+                    {
+                        Path = ip.Path,
+                    })
+                    .ToList(),
+                })
                 .OrderByDescending(x => x.CreatedOn)
-                .Select(a => a)
-                .Skip(skip)
-                .ToList();
+                .ToList()
+                .Skip(skip);
 
             if (take.HasValue)
             {
@@ -107,10 +147,21 @@
         {
             var ads = this.db.Ads
                 .Where(a => a.AgencyProfile.Username == name)
+                .Select(a => new Ad
+                {
+                    Title = a.Title,
+                    Description = a.Description,
+                    Id = a.Id,
+                    CreatedOn = a.CreatedOn,
+                    ImagesPaths = a.ImagesPaths.Select(ip => new ImagePath
+                    {
+                        Path = ip.Path,
+                    })
+                    .ToList(),
+                })
                 .OrderByDescending(a => a.CreatedOn)
-                .Include(a => a.ImagesPaths)
-                .Skip(skip)
-                .ToList();
+                .ToList()
+                .Skip(skip);
 
 
             if (take.HasValue)
@@ -154,14 +205,14 @@
 
         public int GetAdsCount()
         {
-           return this.db.Ads.Count();
+            return this.db.Ads.Count();
         }
 
         public int GetAdsByAgencyCount(string username)
         {
             return this.db.Ads
-                .Include(a => a.AgencyProfile)
-                .Where(a => a.AgencyProfile.Username == username)
+                .Select(a => a.AgencyProfile)
+                .Where(a => a.Username == username)
                 .Count();
         }
     }

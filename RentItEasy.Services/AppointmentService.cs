@@ -17,9 +17,9 @@
             this.db = db;
         }
 
-        public void Create(Ad ad, UserProfile userProfile, AgencyProfile agencyProfile, DateTime date)
+        public async Task Create(Ad ad, UserProfile userProfile, AgencyProfile agencyProfile, DateTime date)
         {
-            
+
             Appointment appointment = new Appointment
             {
                 AdId = ad.Id,
@@ -28,8 +28,8 @@
                 AgencyProfileId = agencyProfile.Id,
             };
 
-            this.db.Appointments.Add(appointment);
-            this.db.SaveChanges();
+            await this.db.Appointments.AddAsync(appointment);
+            await this.db.SaveChangesAsync();
         }
 
         public IEnumerable<Appointment> GetMyAppointments(string username)
@@ -39,11 +39,19 @@
             .FirstOrDefault();
 
             var agencyApp = this.db.Appointments
-                .Include(a => a.Ad)
-                .Include(a => a.AgencyProfile)
-                .Include(a => a.UserProfile)
+                .Select(ap => new Appointment
+                {
+                    Id = ap.Id,
+                    Ad = new Ad { Title = ap.Ad.Title },
+                    UserProfile = new UserProfile
+                    {
+                        FirstName = ap.UserProfile.FirstName,
+                        LastName = ap.UserProfile.LastName,
+                        PhoneNumber = ap.UserProfile.PhoneNumber,
+                    },
+                    AgencyProfileId = ap.AgencyProfileId,
+                })
                 .Where(a => a.AgencyProfileId == agency.Id)
-                .Select(a => a)
                 .ToList();
 
             return agencyApp;

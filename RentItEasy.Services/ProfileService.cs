@@ -39,8 +39,18 @@
         public IEnumerable<AgencyProfile> GetAgencies()
         {
             var agencies = this.db.AgenciesProfiles
-                .Include(ap => ap.Rating)
-                .Select(ap => ap)
+                .Select(a => new AgencyProfile 
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                    Description = a.Description,
+                    Rating = new Rating
+                    {
+                        AverageRating = a.Rating.AverageRating,
+                        CountOfVotes = a.Rating.CountOfVotes,
+                        RatingSum = a.Rating.RatingSum,
+                    },
+                })
                 .OrderBy(ap => ap.Name)
                 .ToList();
 

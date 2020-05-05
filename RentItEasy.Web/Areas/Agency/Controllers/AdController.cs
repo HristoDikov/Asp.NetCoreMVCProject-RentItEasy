@@ -63,10 +63,8 @@
         {
             var currentUserProfile = this.User.Identity.Name;
 
-            var ads = this.adService.GetAgencyAds(currentUserProfile);
-
             int skip = (page - 1) * GlobalConstants.ItemsPerPage;
-            var adsFromService = adService.GetAgencyAds(currentUserProfile, GlobalConstants.ItemsPerPage, skip);
+            var ads = adService.GetAgencyAds(currentUserProfile, GlobalConstants.ItemsPerPage, skip);
 
             int count = this.adService.GetAdsByAgencyCount(currentUserProfile);
 

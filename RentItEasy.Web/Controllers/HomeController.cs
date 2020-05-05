@@ -22,7 +22,7 @@
 
         public IActionResult Index()
         {
-            var adsFromService = adService.GetTenAds();
+            var adsFromService = adService.GetSixAds();
 
             var viewModel = new AdViewModel
             {

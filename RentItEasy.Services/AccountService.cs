@@ -26,8 +26,6 @@
         public async Task CreateUser(string username, string firstName, string lastName, string email,
             string phoneNumber, string password)
         {
-            var rating = new Rating();
-
             var userProfile = new UserProfile
             {
                 Username = username,
@@ -72,12 +70,12 @@
 
                 if (createRole.Succeeded)
                 {
-                    var result = await userManager.AddToRoleAsync(user, roleName);
+                    await userManager.AddToRoleAsync(user, roleName);
                     return;
                 }
             }
 
-            var results = await userManager.AddToRoleAsync(user, roleName);
+            await userManager.AddToRoleAsync(user, roleName);
         }
 
         public async Task CreateAgency(string username, string description, string name, string email, string address, string phoneNumber, string password)
@@ -138,7 +136,7 @@
                 return true;
             }
 
-            return true;
+            return false;
         }
 
         public async Task Logout()

@@ -6,7 +6,7 @@
 
     public interface IAdService
     {
-        IEnumerable<Ad> GetTenAds();
+        IEnumerable<Ad> GetSixAds();
 
         IEnumerable<Ad> GetAllAds(int? take = null, int skip = 0);
 
