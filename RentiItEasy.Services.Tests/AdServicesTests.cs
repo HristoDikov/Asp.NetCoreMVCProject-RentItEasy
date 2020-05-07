@@ -69,7 +69,6 @@
                    .UseInMemoryDatabase(databaseName: "Edit_Ad")
                    .Options;
 
-            IEnumerable<string> imgP = new List<string> { "aaaaa", "bbbbbb" };
             var user = new AgencyProfile { Id = "agencyId", Username = "Name" };
             var ad = new Ad { Id = 1, Title = "AAAAAAAA"};
             var adTitle = ad.Title;

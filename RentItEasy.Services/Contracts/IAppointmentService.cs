@@ -7,7 +7,7 @@ namespace RentItEasy.Services.Contracts
 {
     public interface IAppointmentService
     {
-        Task Create(Ad ad, UserProfile userProfile,AgencyProfile agencyProfile, DateTime date);
+        void Create(Ad ad, UserProfile userProfile,AgencyProfile agencyProfile, DateTime date);
 
         IEnumerable<Appointment> GetMyAppointments(string userId);
 

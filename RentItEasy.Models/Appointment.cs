@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace RentItEasy.Data.Models
+﻿namespace RentItEasy.Data.Models
 {
+    using System;
+
     public class Appointment
     {
         public int Id { get; set; }

@@ -14,12 +14,10 @@
     public class AdController : Controller
     {
         private readonly IAdService adService;
-        private readonly IUploadImageService uploadImageadService;
 
-        public AdController(IUploadImageService uploadImageadService, IAdService adService)
+        public AdController(IAdService adService)
         {
             this.adService = adService;
-            this.uploadImageadService = uploadImageadService;
         }
 
         public IActionResult AllAds(int page = 1)

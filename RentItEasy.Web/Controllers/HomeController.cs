@@ -7,16 +7,13 @@
     using global::RentItEasy.Models;
     using global::RentItEasy.Services;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Logging;
 
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private IAdService adService;
+        private readonly IAdService adService;
 
-        public HomeController(ILogger<HomeController> logger, IAdService adService)
+        public HomeController(IAdService adService)
         {
-            _logger = logger;
             this.adService = adService;
         }
 

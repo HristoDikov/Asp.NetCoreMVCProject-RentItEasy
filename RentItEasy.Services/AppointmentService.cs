@@ -17,7 +17,7 @@
             this.db = db;
         }
 
-        public async Task Create(Ad ad, UserProfile userProfile, AgencyProfile agencyProfile, DateTime date)
+        public void Create(Ad ad, UserProfile userProfile, AgencyProfile agencyProfile, DateTime date)
         {
 
             Appointment appointment = new Appointment
@@ -28,8 +28,8 @@
                 AgencyProfileId = agencyProfile.Id,
             };
 
-            await this.db.Appointments.AddAsync(appointment);
-            await this.db.SaveChangesAsync();
+             this.db.Appointments.Add(appointment);
+             this.db.SaveChanges();
         }
 
         public IEnumerable<Appointment> GetMyAppointments(string username)

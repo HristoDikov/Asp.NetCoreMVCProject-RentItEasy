@@ -24,17 +24,15 @@
                     destinationImage = memoryStream.ToArray();
                 }
 
-                using (var destinationStream = new MemoryStream(destinationImage))
+                using var destinationStream = new MemoryStream(destinationImage);
+                var uploadParams = new ImageUploadParams()
                 {
-                    var uploadParams = new ImageUploadParams()
-                    {
-                        File = new FileDescription(file.FileName, destinationStream)
-                    };
+                    File = new FileDescription(file.FileName, destinationStream)
+                };
 
-                    var result = await cloudinary.UploadAsync(uploadParams);
-                    var path = result.Uri.AbsolutePath;
-                    imgPaths.Add(path);
-                }
+                var result = await cloudinary.UploadAsync(uploadParams);
+                var path = result.Uri.AbsolutePath;
+                imgPaths.Add(path);
             }
 
              return imgPaths;
